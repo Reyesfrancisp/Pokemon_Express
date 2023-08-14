@@ -69,6 +69,18 @@ userSchema.pre('save', async function (next) {
 
 userSchema.index({ username: 1 }, { unique: true });
 
+userSchema.pre('remove', async function (next) {
+    const teamIds = this.teams;
+    try {
+      // Delete associated teams (triggers team schema's pre-remove middleware)
+      await Team.deleteMany({ _id: { $in: teamIds } });
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });  
+
+
 const User = model('User', userSchema);
 
 module.exports = User;

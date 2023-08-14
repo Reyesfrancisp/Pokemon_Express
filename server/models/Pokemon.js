@@ -46,6 +46,17 @@ function checkUniqueMove(pokemon, moveId) {
   return uniqueMoves.size === moves.length;
 }
 
+pokemonSchema.pre('remove', async function (next) {
+  const moveIds = this.moves;
+  try {
+    // Delete associated moves
+    await Move.deleteMany({ _id: { $in: moveIds } });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 const Pokemon = model('Pokemon', pokemonSchema);
 
 module.exports = Pokemon;

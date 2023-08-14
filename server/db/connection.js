@@ -1,11 +1,14 @@
 const mongoose = require('mongoose');
 
-// BpPA9eQcNqtYzhau example from JD
-const isProduction = null; //process.env.PORT;
+const is_prod = process.env.PORT;
 
-if (isProduction) {
-  //mongoose.connect('mongodb+srv://jd:BpPA9eQcNqtYzhau@cluster0.fcshcmp.mongodb.net/?retryWrites=true&w=majority')
-} else mongoose.connect('mongodb://127.0.0.1:27017/pokemon_dev_api_db');
+const mongoURL = is_prod ? process.env.MONGODB_URI : 'mongodb://127.0.0.1:27017/pokemon_devdex_db'; // Use the local URL for development
 
+mongoose.connect(mongoURL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-module.exports = mongoose.connection;
+const db = mongoose.connection;
+
+module.exports = db;
