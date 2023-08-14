@@ -28,7 +28,13 @@ const userSchema = new Schema({
     favorites: [
         {
             type: Types.ObjectId,
-            ref: 'Planet'
+            ref: 'Favorite'
+        }
+    ],
+    teams: [
+        {
+            type: Types.ObjectId,
+            ref: 'Team'
         }
     ]
 }, {
