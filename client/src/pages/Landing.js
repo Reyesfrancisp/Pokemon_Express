@@ -1,7 +1,8 @@
 function Landing() {
-    return (
-        <h1>Landing</h1>
+    return(
+        
+        <h1>This is the Landing Page!</h1>
     )
 }
 
-export default Landing;
+export default Landing
