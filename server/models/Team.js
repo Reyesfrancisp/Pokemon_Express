@@ -27,6 +27,17 @@ teamSchema.pre('save', function (next) {
   next();
 });
 
+teamSchema.pre('remove', async function (next) {
+  const pokemonIds = this.pokemon;
+  try {
+    // Delete associated Pokémon (triggers Pokémon schema's pre-remove middleware)
+    await Pokemon.deleteMany({ _id: { $in: pokemonIds } });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 const Team = model('Team', teamSchema);
 
 module.exports = Team;
