@@ -16,6 +16,7 @@ import AuthForm from '../pages/AuthForm';
 import Landing from '../pages/Landing';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
+import Search from '../pages/Search';
 
 
 function App() {
@@ -47,8 +48,9 @@ function App() {
     <>
       <Header />
 
-    
       <Routes>
+        <Route path="/search" element={<Search />} />
+        
         <Route path="/" element={<Landing />} />
 
         <Route path="/login" element={(

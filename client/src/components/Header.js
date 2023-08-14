@@ -26,7 +26,7 @@ function Header() {
         <NavLink
           to="/"
           className="text-white-600 hover:text-gray-800"
-          activeClassName="text-black font-semibold"
+         
         >
           Home
         </NavLink>
@@ -35,7 +35,7 @@ function Header() {
             <NavLink
               to="/dashboard"
               className="text-white-600 hover:text-gray-800"
-              activeClassName="text-black font-semibold"
+             
             >
               Dashboard
             </NavLink>
@@ -43,7 +43,7 @@ function Header() {
               onClick={logout}
               to="/logout"
               className="text-white-600 hover:text-gray-800"
-              activeClassName="text-black font-semibold"
+             
             >
               Log Out
             </NavLink>
@@ -52,7 +52,7 @@ function Header() {
           <NavLink
             to="/login"
             className="text-white-600 hover:text-gray-800"
-            activeClassName="text-black font-semibold"
+           
           >
             Login
           </NavLink>
