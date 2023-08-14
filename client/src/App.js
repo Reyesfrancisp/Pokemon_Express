@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 // Component Imports
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/Header.jsx';
+import Footer from './components/Footer.jsx';
 
 // Page imports
-import Landing from './pages/Landing';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
+import Landing from './pages/Landing.jsx';
+import About from './pages/About.jsx';
+import Contact from './pages/Contact.jsx';
+import Profile from './pages/Profile.jsx';
+import Register from './pages/Register.jsx';
 
 function App() {
 

@@ -1,4 +1,4 @@
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Header(props) {
   
@@ -13,6 +13,11 @@ function Header(props) {
         <NavLink to="/">Home</NavLink> 
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
+       <NavLink to="/landing">Contact</NavLink>
+       <NavLink to="/profile">Contact</NavLink>
+       <NavLink to="/profile">Contact</NavLink>
+
+
 
       </nav>
     </header>
