@@ -86,3 +86,5 @@ router.post('/team/:teamID/pokemon/:pokemonID/move', isAuthenticated, async (req
     }
   });
   
+
+  module.exports = router;
