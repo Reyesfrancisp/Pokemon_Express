@@ -1,20 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-const fetch = require('node-fetch');
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
+const fetch = require('cross-fetch');
 
 const endpoint = 'https://beta.pokeapi.co/graphql/v1beta';
 const query = `
-  query samplePokeAPIquery {
+query samplePokeAPIquery {
     pokemon_v2_pokemon {
       id
       name
@@ -28,11 +16,17 @@ const query = `
       pokemon_v2_pokemontypes {
         pokemon_v2_type {
           name
+          pokemon_v2_moves {
+            name
+            pokemon_v2_type {
+              name
+            }
+          }
         }
       }
       weight
     }
-  }
+  }  
 `;
 
 fetch(endpoint, {
@@ -45,6 +39,9 @@ fetch(endpoint, {
   .then(response => response.json())
   .then(data => {
     console.log(data);
+    firstPokemon = data.data.pokemon_v2_pokemon[0];
+    console.log(firstPokemon);
+    console.log(firstPokemon.pokemon_v2_pokemontypes);
   })
   .catch(error => {
     console.error(error);

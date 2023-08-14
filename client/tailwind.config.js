@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        white: '#fff', // Add this line to define a custom white background color
+      },
+    },
   },
   plugins: [],
 }
