@@ -1,11 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 const teamSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: 'User', // Reference to the User model
-    required: true
-  },
   pokemon: [
     {
       type: Schema.Types.ObjectId,

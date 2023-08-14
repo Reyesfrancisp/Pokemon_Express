@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const pokemonSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: false
     },
     move1: {
         type: Schema.Types.ObjectId,
