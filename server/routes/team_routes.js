@@ -1,14 +1,14 @@
+
 const router = require('express').Router();
 const { isAuthenticated, validateToken } = require('../auth');
-
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
-
-
 
 /*** Team routes ***/
 
 // Create a team
 router.post('/team', isAuthenticated, async (req, res) => {
+
+  console.log("Got into the create a team route.");
   try {
     // Create a new team
     const team = await Team.create({});
@@ -33,6 +33,8 @@ router.post('/team', isAuthenticated, async (req, res) => {
 
 // Delete a team
 router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
+
+  console.log("Got into the delete a team route.");
   try {
     const teamId = req.params.teamId;
 
@@ -65,8 +67,9 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
 });
 
 //Edit a team name
-
 router.put('/team/:teamId', isAuthenticated, async (req, res) => {
+
+  console.log("Got into the edit a pokemon team route.");
   try {
     const teamId = req.params.teamId;
     const newTeamName = req.body.newTeamName; // Assuming the new name is sent in the request body
