@@ -1,6 +1,10 @@
 const { Schema, model } = require('mongoose');
 
 const teamSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+},
   pokemon: [
     {
       type: Schema.Types.ObjectId,
