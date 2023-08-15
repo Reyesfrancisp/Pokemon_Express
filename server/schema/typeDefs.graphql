@@ -15,7 +15,12 @@ type Favorite {
 type Team {
   _id: ID!
   name: String
-  pokemon: [Pokemon]
+  pokemon1: Pokemon
+  pokemon2: Pokemon
+  pokemon3: Pokemon
+  pokemon4: Pokemon
+  pokemon5: Pokemon
+  pokemon6: Pokemon
 }
 
 type Pokemon {
@@ -54,7 +59,7 @@ type Query {
 }
 
 type Mutation {
-  register(email: String!, password: String!): User
+  register(email: String!, username: String!, password: String!): User
   login(email: String!, password: String!): User
   logout: String
  

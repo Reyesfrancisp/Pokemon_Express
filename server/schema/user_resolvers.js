@@ -5,7 +5,7 @@ const { createToken } = require('../auth'); // Your authentication functions
 
 const userResolvers = {
     Mutation: {
-        register: async (_, { email, password }) => {
+        register: async (_, { email, username, password }) => {
             try {
                 const user = await User.create({ email, username, password });
 
