@@ -43,7 +43,6 @@ router.post('/login', async (req, res) => {
     const valid_pass = await user.validatePass(req.body.password);
 
     if (!valid_pass) throw new Error('Password is incorrect');
-
     // User is verified
     const token = await createToken(user._id);
 

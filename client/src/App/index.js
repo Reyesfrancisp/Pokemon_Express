@@ -12,7 +12,15 @@ import Landing from '../pages/Landing';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
+import TeamList from '../pages/Team';
 
+// User page
+import User from '../pages/User';
+
+//a About page
+import About from '../pages/About';
+
+// contact page
 
 function App() {
   const [state, setState] = useState({
@@ -21,44 +29,49 @@ function App() {
     loading: true
   });
 
-  useEffect(() => {
-    axios.get('/authenticated')
-      .then(res => {
-        setState({
-          ...state,
-          user: res.data.user,
-          loading: false
-        });
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('/authenticated')
+  //     .then(res => {
+  //       setState({
+  //         ...state,
+  //         user: res.data.user,
+  //         loading: false
+  //       });
+  //     });
+  // }, []);
 
 
   return (
     <>
-    <Header state={state} setState={setState} />
+      <Header state={state} setState={setState} />
 
-    {/* {state.loading && <Loading />} */}
+      {/* {state.loading && <Loading />} */}
 
-    <Routes>
-      <Route path="/" element={<Landing />} />
 
-      <Route path="/auth" element={(
-        <Redirect user={state.user}>
-          <AuthForm setState={setState} />
-        </Redirect>
-      )} />
 
-      <Route path="/dashboard" element={(
-        <Redirect user={state.user}>
-          <Dashboard state={state} setState={setState} />
-        </Redirect>
-      )} />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Routes>
+  <Route path="/search" element={<Search />} />
+  <Route path="/about" element={<About />} /> {/* Use the correct About component */}
+  <Route path="/contact" element={<User />} />
+  <Route path="/team" element={<TeamList />} />
+  <Route path="/" element={<Landing />} />
+  <Route path="/auth" element={(
+    <Redirect user={state.user}>
+      <AuthForm setState={setState} />
+    </Redirect>
+  )} />
+  <Route path="/dashboard" element={(
+    <Redirect user={state.user}>
+      <Dashboard state={state} setState={setState} />
+    </Redirect>
+  )} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
 
-    <Footer />
-  </>
+
+      <Footer />
+    </>
   );
 }
 
