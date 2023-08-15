@@ -1,7 +1,8 @@
-const Team = require('./models/Team'); // Import your Mongoose Team model
-const { isAuthenticated } = require('./auth'); // Your authentication function
 
-const ppokemonResolvers = {
+const { Team, Pokemon } = require('../models'); // Model imports
+const { isAuthenticated } = require('../auth'); // Your authentication function
+
+const pokemonResolvers = {
   Mutation: {
     createPokemon: async (_, { teamID, newPokemonData }, { req }) => {
       isAuthenticated(req); // Authenticate the user

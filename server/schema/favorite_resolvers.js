@@ -1,4 +1,6 @@
-const { favoriteResolvers } = require(".");
+
+const { User, Favorite} = require('../models'); // Model imports
+const { isAuthenticated } = require('../auth'); // Your authentication function
 
 const favoriteResolvers = {
     Query: {
@@ -14,6 +16,7 @@ const favoriteResolvers = {
     },
     Mutation: {
       addFavorite: async (_, { pokemonData }, { req }) => {
+        isAuthenticated(req); // Authenticate the user
         try {
           const userId = req.user._id;
           const user = await User.findById(userId);
@@ -32,6 +35,7 @@ const favoriteResolvers = {
         }
       },
       deleteFavorite: async (_, { favoriteId }, { req }) => {
+        isAuthenticated(req); // Authenticate the user
         try {
           const userId = req.user._id;
           const user = await User.findById(userId);

@@ -1,6 +1,6 @@
-const Team = require('./models/Team'); // Import your Mongoose Team model
-const User = require('./models/User'); // Import your Mongoose User model
-const { isAuthenticated } = require('./auth'); // Your authentication function
+
+const { Team, User} = require('../models'); // Model imports
+const { isAuthenticated } = require('../auth'); // Your authentication function
 
 const teamResolvers = {
     Mutation: {

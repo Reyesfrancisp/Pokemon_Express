@@ -39,6 +39,15 @@ input MoveInput {
   type: String!
 }
 
+input NewPokemonInput {
+  name: String!
+}
+
+input PokemonFavorite {
+  name: String
+  id: Int
+}
+
 type Query {
   authenticated: User
   favorites: [Favorite]
@@ -59,6 +68,6 @@ type Mutation {
   createMove(teamID: ID!, pokemonID: ID!, moveData: MoveInput!): Team
   deleteMove(teamID: ID!, pokemonID: ID!, moveID: ID!): Team
 
-  addFavorite(pokemonData: YourInputType): User
+  addFavorite(pokemonData: PokemonFavorite!): User
   deleteFavorite(favoriteId: ID!): User
 }

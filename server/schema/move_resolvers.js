@@ -1,8 +1,11 @@
+
 const { Team } = require('../models'); // Import your models
+const { isAuthenticated } = require('../auth'); // Your authentication function
 
 const moveResolvers = {
     Mutation: {
         createMove: async (_, { teamID, pokemonID, moveData }) => {
+            isAuthenticated(req); // Authenticate the user
             try {
                 const team = await Team.findById(teamID);
 
@@ -26,6 +29,7 @@ const moveResolvers = {
             }
         },
         deleteMove: async (_, { teamID, pokemonID, moveID }) => {
+            isAuthenticated(req); // Authenticate the user
             try {
                 const team = await Team.findById(teamID);
 

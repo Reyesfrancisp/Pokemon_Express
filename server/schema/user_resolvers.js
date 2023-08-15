@@ -1,24 +1,9 @@
-const User = require('./models/User'); // Import your Mongoose User model
-const { createToken, validateToken } = require('./auth'); // Your authentication functions
+
+
+const { User} = require('../models'); // Model imports
+const { createToken } = require('../auth'); // Your authentication functions
 
 const userResolvers = {
-    Query: {
-        authenticated: async (_, __, { req }) => {
-            try {
-                const token = req.cookies.token;
-
-                if (!token) return null;
-
-                const data = await validateToken(token);
-
-                const user = await User.findById(data.user_id);
-
-                return user;
-            } catch (err) {
-                return null;
-            }
-        },
-    },
     Mutation: {
         register: async (_, { email, password }) => {
             try {
