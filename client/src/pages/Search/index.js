@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import getPokemonInfo from './pokeApiQuery';
-import PokemonCard from '../../components/PokemonCard';
+import PokemonCard from '../../components/pokemonCard.js';
 function Search() {
   const [searchQuery, setSearchQuery] = useState('');
   const [info, setInfo] = useState({
