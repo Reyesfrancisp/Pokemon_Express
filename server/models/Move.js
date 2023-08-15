@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const moveSchema = new Schema({
+
     name: {
         type: String,
         required: true

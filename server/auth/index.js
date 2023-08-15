@@ -25,6 +25,7 @@ async function isAuthenticated(req, res, next) {
     const token = req.cookies.token;
 
     if (!token) {
+      console.log("Illegal!")
       throw new Error('You are not authorized to perform that action');
     }
 

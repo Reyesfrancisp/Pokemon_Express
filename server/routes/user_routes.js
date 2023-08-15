@@ -1,9 +1,28 @@
 
 const router = require('express').Router();
-const { createToken, validateToken } = require('../auth');
+const { createToken, validateToken, isAuthenticated } = require('../auth');
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
 
 /***  User routes ***/
+
+// Get the logged-in user's data including populated teams
+router.get('/user', isAuthenticated, async (req, res) => {
+  try {
+    // Find the logged-in user and populate the 'teams' field
+    const user = await User.findById(req.user._id).populate('teams');
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Send the populated user data as the response
+    res.json({ user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Register user
 router.post('/register', async (req, res) => {
   console.log("Got into the register route for a user.");
