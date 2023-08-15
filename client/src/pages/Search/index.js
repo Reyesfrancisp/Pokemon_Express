@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import getPokemonInfo from './pokeApiQuery';
-import PokemonCard from '../../components/pokemonInfoOuput';
-
+import PokemonCard from '../../components/PokemonCard';
 function Search() {
   const [searchQuery, setSearchQuery] = useState('');
   const [info, setInfo] = useState({

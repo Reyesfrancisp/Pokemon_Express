@@ -17,7 +17,7 @@ import Landing from '../pages/Landing';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
-
+import TeamList from '../pages/Team';
 
 function App() {
   const { dispatch, actions, loading } = useStore();
@@ -50,6 +50,8 @@ function App() {
 
       <Routes>
         <Route path="/search" element={<Search />} />
+
+        <Route path="/team" element={<TeamList />} />
         
         <Route path="/" element={<Landing />} />
 
