@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 function AuthForm(props) {
   const [formData, setFormData] = useState({
@@ -18,26 +19,30 @@ function AuthForm(props) {
     const value = e.target.value;
 
     if (prop === 'isLogin') {
-      return setFormData({
+      setFormData({
         ...formData,
         isLogin: value === 'login' ? true : false
-      })
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [prop]: value
+      });
     }
-
-    setFormData({
-      ...formData,
-      [prop]: value
-    });
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-
-    const url = formData.isLogin ? '/login' : '/register';
-
+  
+    let url = '/login'; // Default to login endpoint
+  
+    if (!formData.isLogin) {
+      url = '/register'; // Change to register endpoint if not logging in
+    }
+  
     try {
       const res = await axios.post(url, formData);
-
+  
       props.setState((oldState) => {
         return {
           ...oldState,
@@ -51,12 +56,14 @@ function AuthForm(props) {
         password: '',
         isLogin: true
       });
-
+  
+      // Redirect to dashboard
       navigate('/dashboard');
     } catch (err) {
       setErrorMessage(err.response.data.message);
     }
   };
+  
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -64,40 +71,23 @@ function AuthForm(props) {
         {formData.isLogin ? 'Log In' : 'Register'}
       </h1>
 
-      <form onSubmit={handleSubmit} className="w-72 bg-white p-6 rounded-lg shadow-md">
-        {errorMessage && (
-          <p className="text-red-500 mb-4">{errorMessage}</p>
-        )}
-
-        {!formData.isLogin && (
-          <input
-            onChange={handleInputChange}
-            name="username"
-            type="text"
-            value={formData.username}
-            placeholder="Enter your Username"
-            className="mb-4 p-2 border rounded w-full"
+      <form className="w-72 bg-white p-6 rounded-lg shadow-md">
+        {formData.isLogin ? (
+          <LoginForm
+            handleInputChange={handleInputChange}
+            formData={formData}
+            handleSubmit={handleSubmit}
+            errorMessage={errorMessage}
+          />
+        ) : (
+          <RegisterForm
+            handleInputChange={handleInputChange}
+            formData={formData}
+            handleSubmit={handleSubmit}
+            errorMessage={errorMessage}
           />
         )}
-        <input
-          onChange={handleInputChange}
-          name="email"
-          type="email"
-          value={formData.email}
-          placeholder="Enter your email"
-          className="mb-4 p-2 border rounded w-full"
-        />
-        <input
-          onChange={handleInputChange}
-          name="password"
-          type="password"
-          value={formData.password}
-          placeholder="Enter your password"
-          className="mb-4 p-2 border rounded w-full"
-        />
-        <button className="w-full bg-blue-500 text-white rounded py-2">
-          Submit
-        </button>
+
         <div className="flex items-center mt-4 justify-center ">
           <label htmlFor="login" className="mr-2 ">
             Login
