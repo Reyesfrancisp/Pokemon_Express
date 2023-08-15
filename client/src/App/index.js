@@ -12,7 +12,7 @@ import Landing from '../pages/Landing';
 import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
-
+import TeamList from '../pages/Team';
 
 function App() {
   const [state, setState] = useState({
@@ -35,30 +35,39 @@ function App() {
 
   return (
     <>
-    <Header state={state} setState={setState} />
+      <Header state={state} setState={setState} />
 
-    {/* {state.loading && <Loading />} */}
+      {/* {state.loading && <Loading />} */}
 
-    <Routes>
-      <Route path="/" element={<Landing />} />
 
-      <Route path="/auth" element={(
-        <Redirect user={state.user}>
-          <AuthForm setState={setState} />
-        </Redirect>
-      )} />
 
-      <Route path="/dashboard" element={(
-        <Redirect user={state.user}>
-          <Dashboard state={state} setState={setState} />
-        </Redirect>
-      )} />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+      <Routes>
 
-    <Footer />
-  </>
+
+        <Route path="/search" element={<Search />} />
+
+        <Route path="/team" element={<TeamList />} />
+        
+        <Route path="/" element={<Landing />} />
+
+        <Route path="/auth" element={(
+          <Redirect user={state.user}>
+            <AuthForm setState={setState} />
+          </Redirect>
+        )} />
+
+        <Route path="/dashboard" element={(
+          <Redirect user={state.user}>
+            <Dashboard state={state} setState={setState} />
+          </Redirect>
+        )} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+
+      <Footer />
+    </>
   );
 }
 
