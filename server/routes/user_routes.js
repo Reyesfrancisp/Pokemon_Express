@@ -16,9 +16,8 @@ router.post('/register', async (req, res) => {
       httpOnly: true
     });
 
-    res.send({
-      user
-    });
+
+    res.send({ user });
 
   } catch (err) {
     console.log(err);
