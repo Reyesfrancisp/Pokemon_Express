@@ -1,13 +1,27 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import getPokemonInfo from './pokeApiQuery';
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState('');
-  const navigate = useNavigate();
+  const [info, setInfo] = useState({
+    pokemonName: "Pikachu",
+    pokemonID: "25",
+    pokemonHeight: 4,
+    pokemonWeight: 60,
+    type1: "Electric",
+    type2: '',
+  });
 
-  const handleSearch = () => {
-    navigate(`/search/${searchQuery}`);
+  const handleSearch = async () => {
+    try {
+      const pokemonInfo = await getPokemonInfo(searchQuery);
+      setInfo(pokemonInfo); // Update the info state with fetched data
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
   };
+
 
   return (
     <div className="flex-col md:flex">
@@ -32,10 +46,15 @@ function Search() {
           <div class="relative max-w-md bg-gray-200 rounded-lg overflow-hidden shadow-md">
             <div class="absolute z-0 top-2 left-10 w-full h-2/3 bg-gradient-to-r from-slate-600 to-white rotate-6"></div>
             <div class="absolute z-1 top-32 transform -translate-x-2 w-full h-2/3 bg-gradient-to-br from-teal-600 to-white rotate-6"></div>
-            <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/778.png" alt="Pokemon from the search bar" class="w-3/4 h-auto mx-auto relative z-10" />
+            <img src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${info.pokemonID}.png`} alt="Pokemon from the search bar" className="w-3/4 h-auto mx-auto relative z-10" />
             <div class="p-4 relative z-10 bg-gray-200">
-              <h2 class="text-xl font-semibold mb-2">Pokemon name</h2>
+              <h2 class="text-xl font-semibold mb-2">{info.pokemonName}</h2>
               <p class="text-gray-600">Info about the Pokemon goes here.</p>
+              <p>Pokemon ID: {info.pokemonID}</p>
+              <p>Pokemon Height: {info.pokemonHeight}</p>
+              <p>Pokemon Weight: {info.pokemonWeight}</p>
+              <p>Type 1: {info.type1}</p>
+              <p>Type 2: {info.type2}</p>
             </div>
           </div>
         </div>
