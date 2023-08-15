@@ -2,17 +2,38 @@
     _id: ID!
     email: String!
     username: String!
+    teams: [Team]
     favorites: [Favorite]
   }
+
+  type Favorite {
+  _id: ID!
+}
 
   type Team {
     _id: ID!
     name: String
+    pokemon: [Pokemon]
   }
+
+  type Pokemon {
+  _id: ID!
+  name: String
+  move1: Move
+  move2: Move
+  move3: Move
+  move4: Move
+  }
+
+type Move {
+  _id: ID!
+  name: String!
+  type: String!
+}
 
   type Query {
     authenticated: User
-    favorites: [Favorite] # Query to get all favorites
+    favorites: [Favorite]
   }
 
   type Mutation {
@@ -34,9 +55,6 @@
     type: String!
   }
 
-  type Favorite {
-  _id: ID!
-}
 
 type Mutation {
   addFavorite(pokemonData: YourInputType): User
