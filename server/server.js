@@ -11,6 +11,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const db = require('./db/connection');
 
+const { typeDefs, resolvers } = require('./schema');
+
 const app = express();
 const httpServer = http.createServer(app);
 const PORT = process.env.PORT || 3333;
