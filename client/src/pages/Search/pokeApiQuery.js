@@ -31,8 +31,11 @@ const getPokemonInfo = async (number) => {
     const pokemon = parsedData.data.pokemon_v2_pokemon[0];
     const pokemonName = pokemon.name;
     const pokemonID = pokemon.id;
-    const pokemonHeight = pokemon.height;
-    const pokemonWeight = pokemon.weight;
+    const heightInInches = pokemon.height*4;
+    const feet = Math.floor(heightInInches / 12);
+    const inches = heightInInches % 12;
+    const pokemonHeight = `${feet}' ${inches}"`;
+    const pokemonWeight = (pokemon.weight/4.53947368421).toFixed(2);
     const type1 = pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
     const type2 = pokemon.pokemon_v2_pokemontypes[1]?.pokemon_v2_type.name || '';
     const formattedID = pokemon.id.toString().padStart(3, '0'); // Converts to string and adds leading zeros

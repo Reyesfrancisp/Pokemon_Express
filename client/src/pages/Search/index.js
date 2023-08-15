@@ -8,7 +8,7 @@ function Search() {
     formattedID: "025",
     pokemonName: "Pikachu",
     pokemonID: "25",
-    pokemonHeight: 4,
+    pokemonHeight: "1'00\"",
     pokemonWeight: 60,
     type1: "Electric",
     type2: '',
@@ -52,7 +52,7 @@ function Search() {
               <h2 class="capitalize text-xl font-semibold mb-2">{info.pokemonName}</h2>
               <p>Pokemon ID: {info.pokemonID}</p>
               <p>Pokemon Height: {info.pokemonHeight}</p>
-              <p>Pokemon Weight: {info.pokemonWeight}</p>
+              <p>Pokemon Weight: {info.pokemonWeight} lbs</p>
               <p class="capitalize">Type 1: {info.type1}</p>
               {info.type2 && <p class="capitalize">Type 2: {info.type2}</p>}
             </div>
