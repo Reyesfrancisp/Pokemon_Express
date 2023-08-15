@@ -31,16 +31,18 @@ router.post('/register', async (req, res) => {
 
 // Login User
 router.post('/login', async (req, res) => {
-
   console.log("Got into the login user post route.");
   try {
+    const { identifier, password } = req.body;
+
+    // Find a user with the given identifier (either email or username)
     const user = await User.findOne({
-      email: req.body.email
+      $or: [{ email: identifier }, { username: identifier }]
     });
 
-    if (!user) throw new Error('A user with that email address does not exist');
+    if (!user) throw new Error('A user with that email or username does not exist');
 
-    const valid_pass = await user.validatePass(req.body.password);
+    const valid_pass = await user.validatePass(password);
 
     if (!valid_pass) throw new Error('Password is incorrect');
 
@@ -58,6 +60,7 @@ router.post('/login', async (req, res) => {
     });
   }
 });
+
 
 // Check if user is logged in
 router.get('/authenticated', async (req, res) => {
