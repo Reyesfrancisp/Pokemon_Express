@@ -21,6 +21,10 @@ function App() {
     loading: true
   });
 
+  const [userState, setUserState ] = useState({
+    
+  })
+
   useEffect(() => {
     axios.get('/authenticated')
       .then(res => {
