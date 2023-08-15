@@ -29,15 +29,17 @@ const getPokemonInfo = async (number) => {
 
     const parsedData = await response.json();
     const pokemon = parsedData.data.pokemon_v2_pokemon[0];
-
     const pokemonName = pokemon.name;
     const pokemonID = pokemon.id;
     const pokemonHeight = pokemon.height;
     const pokemonWeight = pokemon.weight;
     const type1 = pokemon.pokemon_v2_pokemontypes[0].pokemon_v2_type.name;
     const type2 = pokemon.pokemon_v2_pokemontypes[1]?.pokemon_v2_type.name || '';
+    const formattedID = pokemon.id.toString().padStart(3, '0'); // Converts to string and adds leading zeros
+
 
     return {
+      formattedID,
       pokemonName,
       pokemonID,
       pokemonHeight,
