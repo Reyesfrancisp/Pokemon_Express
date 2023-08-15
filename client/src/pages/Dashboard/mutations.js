@@ -1,4 +1,4 @@
-function Dashboard () {
+function Mutations () {
 
     return (
       <main className="dashboard">
@@ -9,4 +9,4 @@ function Dashboard () {
     )
   }
   
-  export default Dashboard;
+  export default Mutation;
