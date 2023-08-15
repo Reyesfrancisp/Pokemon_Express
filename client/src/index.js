@@ -1,19 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom'; // Import ReactDOM directly
 import './index.scss';
 import App from './App';
 
 import { BrowserRouter } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const root = document.getElementById('root'); // No need to createRoot
+ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
+  root
 );
-
 
 const endpoint = 'https://beta.pokeapi.co/graphql/v1beta';
 const query = `
