@@ -1,29 +1,31 @@
-  type User {
-    _id: ID!
-    email: String!
-    username: String!
-    teams: [Team]
-    favorites: [Favorite]
-  }
-
-  type Favorite {
+type User {
   _id: ID!
+  email: String!
+  username: String!
+  teams: [Team]
+  favorites: [Favorite]
 }
 
-  type Team {
-    _id: ID!
-    name: String
-    pokemon: [Pokemon]
-  }
+type Favorite {
+  _id: ID!
+  name: String
+  id: Int
+}
 
-  type Pokemon {
+type Team {
+  _id: ID!
+  name: String
+  pokemon: [Pokemon]
+}
+
+type Pokemon {
   _id: ID!
   name: String
   move1: Move
   move2: Move
   move3: Move
   move4: Move
-  }
+}
 
 type Move {
   _id: ID!
@@ -31,32 +33,32 @@ type Move {
   type: String!
 }
 
-  type Query {
-    authenticated: User
-    favorites: [Favorite]
-  }
+input MoveInput {
+  name: String!
+  description: String!
+  type: String!
+}
 
-  type Mutation {
-    register(email: String!, password: String!): User
-    login(email: String!, password: String!): User
-    logout: String
-    
-    createTeam: Team
-    deleteTeam(teamId: ID!): Team
-    editTeamName(teamId: ID!, newTeamName: String!): Team
-
-    createMove(teamID: ID!, pokemonID: ID!, moveData: MoveInput!): Team
-    deleteMove(teamID: ID!, pokemonID: ID!, moveID: ID!): Team
-  }
-
-  input MoveInput {
-    name: String!
-    description: String!
-    type: String!
-  }
-
+type Query {
+  authenticated: User
+  favorites: [Favorite]
+}
 
 type Mutation {
+  register(email: String!, password: String!): User
+  login(email: String!, password: String!): User
+  logout: String
+ 
+  createTeam: Team
+  deleteTeam(teamId: ID!): Team
+  editTeamName(teamId: ID!, newTeamName: String!): Team
+
+  createPokemon(teamID: ID!, newPokemon: NewPokemonInput!): Team
+  deletePokemon(teamID: ID!, pokemonID: ID!): Team
+
+  createMove(teamID: ID!, pokemonID: ID!, moveData: MoveInput!): Team
+  deleteMove(teamID: ID!, pokemonID: ID!, moveID: ID!): Team
+
   addFavorite(pokemonData: YourInputType): User
   deleteFavorite(favoriteId: ID!): User
 }

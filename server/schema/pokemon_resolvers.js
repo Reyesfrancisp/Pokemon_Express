@@ -1,7 +1,7 @@
 const Team = require('./models/Team'); // Import your Mongoose Team model
 const { isAuthenticated } = require('./auth'); // Your authentication function
 
-const resolvers = {
+const ppokemonResolvers = {
   Mutation: {
     createPokemon: async (_, { teamID, newPokemonData }, { req }) => {
       isAuthenticated(req); // Authenticate the user
@@ -49,4 +49,4 @@ const resolvers = {
   },
 };
 
-module.exports = resolvers;
+module.exports = pokemonResolvers;
