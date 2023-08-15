@@ -1,11 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-
-import { AUTHENTICATE } from './queries';
-
-import { useStore } from '../store';
-
+import axios from 'axios';
 // components
 import Header from '../components/Header';
 import Redirect from '../components/Redirect';
@@ -20,50 +15,48 @@ import Search from '../pages/Search';
 import TeamList from '../pages/Team';
 
 function App() {
-  const { dispatch, actions, loading } = useStore();
-  const { data } = useQuery(AUTHENTICATE);
+  const [state, setState] = useState({
+    user: null,
+    notes: [],
+    loading: true
+  });
 
   useEffect(() => {
-    if (data) {
-      dispatch({
-        type: actions.UPDATE_USER,
-        payload: data.authenticate.user
+    axios.get('/authenticated')
+      .then(res => {
+        setState({
+          ...state,
+          user: res.data.user,
+          loading: false
+        });
       });
+  }, []);
 
-      dispatch({
-        type: actions.TOGGLE_LOADING
-      });
-
-      return () => {
-        if (loading) {
-          dispatch({
-            type: actions.TOGGLE_LOADING
-          });
-        }
-      };
-    }
-  }, [loading, actions.UPDATE_USER, actions.TOGGLE_LOADING, dispatch, data]);
 
   return (
     <>
-      <Header />
+      <Header state={state} setState={setState} />
+
+      {/* {state.loading && <Loading />} */}
+
+      <Route path="/search" element={<Search />} />
+
+      <Route path="/team" element={<TeamList />} />
+
+
 
       <Routes>
-        <Route path="/search" element={<Search />} />
-
-        <Route path="/team" element={<TeamList />} />
-        
         <Route path="/" element={<Landing />} />
 
-        <Route path="/login" element={(
-          <Redirect>
-            <AuthForm />
+        <Route path="/auth" element={(
+          <Redirect user={state.user}>
+            <AuthForm setState={setState} />
           </Redirect>
         )} />
 
         <Route path="/dashboard" element={(
-          <Redirect>
-            <Dashboard />
+          <Redirect user={state.user}>
+            <Dashboard state={state} setState={setState} />
           </Redirect>
         )} />
 
