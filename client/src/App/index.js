@@ -39,13 +39,16 @@ function App() {
 
       {/* {state.loading && <Loading />} */}
 
-      <Route path="/search" element={<Search />} />
-
-      <Route path="/team" element={<TeamList />} />
 
 
 
       <Routes>
+
+
+        <Route path="/search" element={<Search />} />
+
+        <Route path="/team" element={<TeamList />} />
+        
         <Route path="/" element={<Landing />} />
 
         <Route path="/auth" element={(
