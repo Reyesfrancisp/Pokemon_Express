@@ -9,8 +9,10 @@ function AuthForm(props) {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',  
     isLogin: true
   });
+
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
@@ -33,11 +35,16 @@ function AuthForm(props) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (!formData.isLogin && formData.password !== formData.confirmPassword) {
+      setErrorMessage('Passwords do not match');
+      return;
+    }
   
-    let url = '/login'; // Default to login endpoint
+    let url = '/login';  // Default to login endpoint
   
     if (!formData.isLogin) {
-      url = '/register'; // Change to register endpoint if not logging in
+      url = '/register';  // Change to register endpoint if not logging in
     }
   
     try {
