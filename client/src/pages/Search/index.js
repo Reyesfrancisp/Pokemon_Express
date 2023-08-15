@@ -23,6 +23,30 @@ function Search() {
     }
   };
 
+  const nextPokemon = async () => {
+    try {
+      const currentID = Number(info.pokemonID);
+      const nextID = currentID + 1;
+      setSearchQuery(nextID.toString());
+      const pokemonInfo = await getPokemonInfo(nextID);
+      setInfo(pokemonInfo);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
+  const previousPokemon = async () => {
+    try {
+      const currentID = Number(info.pokemonID);
+      const prevID = currentID - 1;
+      setSearchQuery(prevID.toString());
+      const pokemonInfo = await getPokemonInfo(prevID);
+      setInfo(pokemonInfo);
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   return (
     <div className="flex-col md:flex">
       <h1 className="text-3xl text-center font-semibold mb-4">Search Page</h1>
@@ -41,12 +65,18 @@ function Search() {
           Search
         </button>
 
-        <div className="flex justify-center items-center space-x-10">
-          <button className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]">
+        <div className="flex justify-center items-center space-x-10 mt-4">
+          <button
+            className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]"
+            onClick={previousPokemon}
+          >
             Previous
           </button>
           <PokemonCard info={info} />
-          <button className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]">
+          <button
+            className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]"
+            onClick={nextPokemon}
+          >
             Next
           </button>
         </div>
