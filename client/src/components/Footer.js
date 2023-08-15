@@ -1,9 +1,9 @@
 function Footer() {
-    return (
-      <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-2 p-2 md:p-4">
-        <div className="w-full max-w-screen-xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <a
+  return (
+    <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-2 p-2 md:p-4 fixed bottom-0 w-full">
+      <div className="w-full max-w-screen-xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+        <a
               href="https://github.com/Reyesfrancisp/pokemon_devdex"
               className="flex items-center"
               target="_blank"
@@ -42,10 +42,10 @@ function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
-          <hr className="my-3 border-gray-200 md:my-4 dark:border-gray-700" />
-          <span className="block text-xxs md:text-xs text-gray-500 md:text-center dark:text-gray-400">
-            © {new Date().getFullYear()}{' '}
+        </div>
+        <hr className="my-3 border-gray-200 md:my-4 dark:border-gray-700" />
+        <span className="block text-xxs md:text-xs text-gray-500 md:text-center dark:text-gray-400">
+        © {new Date().getFullYear()}{' '}
             <a
               href="https://github.com/Reyesfrancisp/pokemon_devdex"
               className="hover:underline"
@@ -55,11 +55,10 @@ function Footer() {
               App Name™
             </a>
             . All Rights Reserved.
-          </span>
-        </div>
-      </footer>
-    );
-  }
-  
-  export default Footer;
-  
+        </span>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;
