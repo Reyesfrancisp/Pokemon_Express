@@ -13,6 +13,7 @@ import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
 import TeamList from '../pages/Team';
+import TeamEdit from '../pages/TeamEdit';
 
 function App() {
   const [state, setState] = useState({
@@ -22,7 +23,12 @@ function App() {
   });
 
   const [userState, setUserState ] = useState({
-    
+    user: "",
+    teams: [],
+    favorites: [],
+    teamID: "",
+    pokemonID: "",
+    moveID: "",
   })
 
   useEffect(() => {
@@ -49,9 +55,11 @@ function App() {
       <Routes>
 
 
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search state={userState} setState={setUserState}/>} />
 
-        <Route path="/team" element={<TeamList />} />
+        <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState}/>} />
+
+        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState}/>} />
         
         <Route path="/" element={<Landing />} />
 

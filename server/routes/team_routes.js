@@ -9,21 +9,22 @@ const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model i
 router.post('/team', isAuthenticated, async (req, res) => {
 
   console.log("Got into the create a team route.");
+  console.log(req.body);
   try {
     // Create a new team
-    const team = await Team.create({});
+    const team = await Team.create({ name: req.body.name});
 
     // Find the user and update the user's teams array
     const user = await User.findByIdAndUpdate(
       req.user._id,
       {
-        $push: { teams: team._id }, // Push the newly created team's ID
+        $push: { teams: team.id }, // Push the newly created team's ID
       },
       { new: true }
     ).populate('teams'); // Populate the 'teams' field for the user
 
     res.send({
-      user,
+      user
     });
   } catch (error) {
     console.error(error);
