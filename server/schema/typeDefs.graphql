@@ -1,0 +1,33 @@
+type User {
+  _id: ID!
+  username: String!
+  favorites: [Favorite!]!
+}
+
+type Favorite {
+  _id: ID!
+  user: User!
+  pokemon: [Pokemon!]!
+}
+
+type Pokemon {
+  _id: ID!
+  name: String!
+  moves: [Move!]!
+}
+
+type Move {
+  _id: ID!
+  name: String!
+}
+
+type Mutation {
+  createUser(username: String!): User!
+  createFavorite(userId: ID!): Favorite!
+  createPokemon(name: String!, favoriteId: ID!): Pokemon!
+  addMoveToPokemon(pokemonId: ID!, moveId: ID!): Pokemon!
+}
+
+type Query {
+  getUser(userId: ID!): User!
+}
