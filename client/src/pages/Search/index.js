@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import getPokemonInfo from './pokeApiQuery';
-import PokemonCard from '../../components/PokemonCard';
+import { useState } from "react";
+import getPokemonInfo from "./pokeApiQuery";
+import PokemonCard from "../../components/pokemonCard";
 
 function Search() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [info, setInfo] = useState({
     formattedID: "025",
     pokemonName: "Pikachu",
@@ -11,7 +11,7 @@ function Search() {
     pokemonHeight: "1'00\"",
     pokemonWeight: 60,
     type1: "Electric",
-    type2: '',
+    type2: "",
   });
 
   const handleSearch = async () => {
@@ -19,10 +19,9 @@ function Search() {
       const pokemonInfo = await getPokemonInfo(searchQuery);
       setInfo(pokemonInfo); // Update the info state with fetched data
     } catch (error) {
-      console.error('An error occurred:', error);
+      console.error("An error occurred:", error);
     }
   };
-
 
   return (
     <div className="flex-col md:flex">
@@ -42,10 +41,16 @@ function Search() {
           Search
         </button>
 
-
-        <PokemonCard info={info} />
-
+        <div className="flex justify-center items-center space-x-10">
+          <button className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]">
+            Previous
+          </button>
+          <PokemonCard info={info} />
+          <button className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]">
+            Next
+          </button>
         </div>
+      </div>
     </div>
   );
 }
