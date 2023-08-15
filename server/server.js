@@ -13,6 +13,12 @@ const userRoutes = require('./routes/user_routes');
 
 const app = express();
 const PORT = process.env.PORT || 3333;
+const is_prod = process.env.PORT;
+
+
+if (is_prod) {
+  app.use(express.static(path.join(__dirname, '../browser/build')));
+}
 
 // Load middleware
 app.use(cors()); // Enable CORS
