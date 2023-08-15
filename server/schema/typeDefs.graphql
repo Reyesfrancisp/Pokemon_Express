@@ -1,33 +1,44 @@
-type User {
-  _id: ID!
-  username: String!
-  favorites: [Favorite!]!
-}
+  type User {
+    _id: ID!
+    email: String!
+    username: String!
+    favorites: [Favorite]
+  }
 
-type Favorite {
-  _id: ID!
-  user: User!
-  pokemon: [Pokemon!]!
-}
+  type Team {
+    _id: ID!
+    name: String
+  }
 
-type Pokemon {
-  _id: ID!
-  name: String!
-  moves: [Move!]!
-}
+  type Query {
+    authenticated: User
+    favorites: [Favorite] # Query to get all favorites
+  }
 
-type Move {
+  type Mutation {
+    register(email: String!, password: String!): User
+    login(email: String!, password: String!): User
+    logout: String
+    
+    createTeam: Team
+    deleteTeam(teamId: ID!): Team
+    editTeamName(teamId: ID!, newTeamName: String!): Team
+
+    createMove(teamID: ID!, pokemonID: ID!, moveData: MoveInput!): Team
+    deleteMove(teamID: ID!, pokemonID: ID!, moveID: ID!): Team
+  }
+
+  input MoveInput {
+    name: String!
+    description: String!
+    type: String!
+  }
+
+  type Favorite {
   _id: ID!
-  name: String!
 }
 
 type Mutation {
-  createUser(username: String!): User!
-  createFavorite(userId: ID!): Favorite!
-  createPokemon(name: String!, favoriteId: ID!): Pokemon!
-  addMoveToPokemon(pokemonId: ID!, moveId: ID!): Pokemon!
-}
-
-type Query {
-  getUser(userId: ID!): User!
+  addFavorite(pokemonData: YourInputType): User
+  deleteFavorite(favoriteId: ID!): User
 }
