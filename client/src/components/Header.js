@@ -1,20 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
-import { useStore } from '../store';
 
-function Header() {
-  const { dispatch, actions, user } = useStore();
-
+function Header(props) {
   const logout = async e => {
     e.preventDefault();
 
-    await axios.get('/api/logout');
+    await axios.get('/logout');
 
-    dispatch({
-      type: actions.UPDATE_USER,
-      payload: null
-    });
+    props.setState((oldState) => {
+      return {
+        ...oldState,
+        user: null
+      }
+    })
   }
 
   return (
@@ -22,7 +21,7 @@ function Header() {
       <h3 className="text-xl font-semibold">Pokemon App</h3>
 
       <nav className="flex items-center space-x-4">
-        {user && <p className="text-gray-600">Welcome, {user.username}</p>}
+        {props.state.user && <p className="text-gray-600">Welcome, {props.state.user.username}</p>}
         <NavLink
           to="/"
           className="text-white-600 hover:text-gray-800"
@@ -30,7 +29,7 @@ function Header() {
         >
           Home
         </NavLink>
-        {user ? (
+        {props.state.user ? (
           <>
             <NavLink
               to="/dashboard"
@@ -50,7 +49,7 @@ function Header() {
           </>
         ) : (
           <NavLink
-            to="/login"
+            to="/auth"
             className="text-white-600 hover:text-gray-800"
            
           >
