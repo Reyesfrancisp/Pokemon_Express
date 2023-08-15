@@ -14,6 +14,33 @@ function Contact() {
                 </li>
                 {/* Add more contact information as needed */}
             </ul>
+            <ul>
+                <li>
+                    GitHub: <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                </li>
+                <li>
+                    LinkedIn: <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                </li>
+                {/* Add more contact information as needed */}
+            </ul>
+            <ul>
+                <li>
+                    GitHub: <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                </li>
+                <li>
+                    LinkedIn: <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                </li>
+                {/* Add more contact information as needed */}
+            </ul>
+            <ul>
+                <li>
+                    GitHub: <a href="https://github.com/your-github-username" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+                </li>
+                <li>
+                    LinkedIn: <a href="https://www.linkedin.com/in/your-linkedin-username" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a>
+                </li>
+                {/* Add more contact information as needed */}
+            </ul>
             <p>We look forward to hearing from you!</p>
         </div>
     );
