@@ -8,11 +8,6 @@ const favoriteSchema = new Schema({
     id: {
         type: Number,
         required: true
-    },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User model
-        required: true
     }
 });
 
