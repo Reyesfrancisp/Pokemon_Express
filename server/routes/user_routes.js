@@ -85,3 +85,5 @@ router.get('/logout', (req, res) => {
   res.clearCookie('token');
   res.send('Logged out successfully');
 });
+
+module.exports = router;
