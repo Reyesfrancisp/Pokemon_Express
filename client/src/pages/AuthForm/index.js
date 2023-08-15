@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { useStore } from '../../store';
-import { LOGIN_USER, REGISTER_USER } from './mutations';
+import axios from 'axios';
 
-function AuthForm() {
-  const [loginUser] = useMutation(LOGIN_USER);
-  const [registerUser] = useMutation(REGISTER_USER);
-  const { dispatch, actions } = useStore();
+
+function AuthForm(props) {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -25,7 +21,7 @@ function AuthForm() {
       return setFormData({
         ...formData,
         isLogin: value === 'login' ? true : false
-      });
+      })
     }
 
     setFormData({
@@ -37,19 +33,17 @@ function AuthForm() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Pick the mutation function from useMutation
-    const authFunction = formData.isLogin ? loginUser : registerUser;
+    const url = formData.isLogin ? '/login' : '/register';
 
     try {
-      const { data } = await authFunction({
-        variables: formData
-      });
+      const res = await axios.post(url, formData);
 
-      dispatch({
-        type: actions.UPDATE_USER,
-        payload: data.login.user
+      props.setState((oldState) => {
+        return {
+          ...oldState,
+          user: res.data.user
+        }
       });
-
       setErrorMessage('');
       setFormData({
         username: '',
@@ -60,7 +54,7 @@ function AuthForm() {
 
       navigate('/dashboard');
     } catch (err) {
-      setErrorMessage(err.message);
+      setErrorMessage(err.response.data.message);
     }
   };
 
