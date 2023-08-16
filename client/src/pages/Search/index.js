@@ -1,11 +1,7 @@
 import { useState } from "react";
 import getPokemonInfo from "./pokeApiQuery";
-<<<<<<< HEAD
-import PokemonCard from "../../components/pokemonCard";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-=======
 import PokemonCard from "../../components/PokemonOutput";
->>>>>>> 62d3478033590b6dbd1ee95ab01e00f8d21f65b0
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
