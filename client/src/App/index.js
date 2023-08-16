@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 // components
 import Header from '../components/Header';
@@ -9,7 +9,6 @@ import Footer from '../components/Footer';
 // pages
 import AuthForm from '../pages/AuthForm';
 import Landing from '../pages/Landing';
-import Dashboard from '../pages/Dashboard';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
 import TeamList from '../pages/Team';
@@ -31,8 +30,9 @@ function App() {
   const [stateTracker, setStateTracker] = useState({
     teamID: "",
     pokemonID: "",
-    moveID: ""
-  })
+    moveID: "",
+  });
+
 
   useEffect(() => {
     axios.get('/authenticated')
@@ -50,21 +50,28 @@ function App() {
     <>
       <Header state={state} setState={setState} />
 
-      {/* {state.loading && <Loading />} */}
-
-
-
 
       <Routes>
 
 
         <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
-        <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
+        {/* go to /team if logged in, otherwise go to the Landing page*/}
+        {state.user ? (
+          <Route path="/" element={<Navigate to="/team" />} />
+        ) : (
+          <Route path="/" element={<Landing />} />
+        )}
+
+        {/* go to /auth if not logged in, otherwise /team */}
+        {state.user ? (
+          <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState} />} />
+        ) : (
+          <Route path="/team" element={<Navigate to="/auth" />} />
+        )}
 
         <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         
-        <Route path="/" element={<Landing />} />
 
         <Route path="/auth" element={(
           <Redirect user={state.user}>
@@ -72,11 +79,6 @@ function App() {
           </Redirect>
         )} />
 
-        <Route path="/dashboard" element={(
-          <Redirect user={state.user}>
-            <Dashboard state={state} setState={setState} />
-          </Redirect>
-        )} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
