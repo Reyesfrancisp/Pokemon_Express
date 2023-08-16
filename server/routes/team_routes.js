@@ -12,7 +12,7 @@ router.post('/team', isAuthenticated, async (req, res) => {
   console.log(req.body);
   try {
     // Create a new team
-    const team = await Team.create({ name: req.body.name});
+    const team = await Team.create({ name: req.body.name });
 
     // Find the user and update the user's teams array
     const user = await User.findByIdAndUpdate(
@@ -38,14 +38,28 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
   console.log("Got into the delete a team route.");
   try {
     const teamId = req.params.teamId;
-    console.log("The team id to be deleted: " , teamId);
+    console.log("The team id to be deleted: ", teamId);
     // Find the team to delete
     const team = await Team.findById(teamId);
 
-    console.log("team to be deleted: ", team );
+    console.log("team to be deleted: ", team);
     if (!team) {
       return res.status(404).send('Team not found');
     }
+    
+    // Extract the _id values of the Pokémon associated with the team
+    const pokemonIds = [
+      team.pokemon1,
+      team.pokemon2,
+      team.pokemon3,
+      team.pokemon4,
+      team.pokemon5,
+      team.pokemon6
+    ].filter(pokemonId => pokemonId); // Filter out any empty IDs
+
+    // Delete associated Pokémon documents
+    await Pokemon.deleteMany({ _id: { $in: pokemonIds } });
+
 
     // Delete the team (triggers team schema's pre-remove middleware)
     await team.deleteOne();

@@ -19,7 +19,7 @@ router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
             return res.status(404).send('Team not found');
         }
         console.log("The pokemon to be added is is : ", pkmnName);
-       
+
         const newPokemon = new Pokemon({ name: pkmnName });
         // Check if any of the pokemon properties is empty and add the new Pokémon
         if (!team.pokemon1) {
@@ -48,6 +48,7 @@ router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
             team.pokemon6 = newPokemon;
             await newPokemon.save();
         } else {
+            console.log("Cannot add pokemon, all slots are filled");
             // Handle the case when all slots are filled
             return res.status(400).json({ error: 'All Pokémon slots are filled' });
         }
@@ -71,40 +72,48 @@ router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
 });
 
 // Delete a pokemon that belongs to a team
-router.delete('/team/:teamID/pokemon/:pkmnName', isAuthenticated, async (req, res) => {
-
+router.delete('/team/:teamID/pokemon/:pokemonID', isAuthenticated, async (req, res) => {
     console.log("Got into the delete a pokemon that belongs to a team route.");
     try {
-        const teamId = req.params.teamID;
-        const pkmnName = req.params.pkmnName;
-
-        // Find the team
-        const team = await Team.findById(teamId);
-
-        if (!team) {
-            return res.status(404).send('Team not found');
-        }
-
-        // Find the index of the Pokémon to delete within the team's pokemon array
-        const pokemonIndex = team.pokemon.findIndex(pokemon => pokemon._id.toString() === pkmnName);
-
-        if (pokemonIndex === -1) {
-            return res.status(404).send('Pokemon not found');
-        }
-
-        // Remove the Pokémon from the team's pokemon array
-        team.pokemon.splice(pokemonIndex, 1);
-
-        // Save the updated team
-        await team.save();
-
-        res.send({
-            team,
-        });
+      const teamId = req.params.teamID;
+      const pokeID = req.params.pokemonID;
+  
+      // Find the team
+      const team = await Team.findById(teamId);
+  
+      if (!team) {
+        return res.status(404).send('Team not found');
+      }
+  
+      // Check which column contains the Pokémon and set it to null
+      if (team.pokemon1 && team.pokemon1.toString() === pokeID) {
+        team.pokemon1 = null;
+      } else if (team.pokemon2 && team.pokemon2.toString() === pokeID) {
+        team.pokemon2 = null;
+      } else if (team.pokemon3 && team.pokemon3.toString() === pokeID) {
+        team.pokemon3 = null;
+      } else if (team.pokemon4 && team.pokemon4.toString() === pokeID) {
+        team.pokemon4 = null;
+      } else if (team.pokemon5 && team.pokemon5.toString() === pokeID) {
+        team.pokemon5 = null;
+      } else if (team.pokemon6 && team.pokemon6.toString() === pokeID) {
+        team.pokemon6 = null;
+      } else {
+        return res.status(404).send('Pokemon not found in team');
+      }
+  
+      // Save the updated team
+      await team.save();
+  
+      res.send({
+        team,
+      });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server Error');
+      console.error(error);
+      res.status(500).send('Server Error');
     }
-});
+  });
+  
+  
 
 module.exports = router;

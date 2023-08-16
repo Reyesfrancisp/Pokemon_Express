@@ -60,7 +60,7 @@ function App() {
 
         <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
-        <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
+        <Route path="/teams" element={<TeamList userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
 
         <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         

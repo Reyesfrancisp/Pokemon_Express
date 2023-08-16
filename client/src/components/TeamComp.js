@@ -14,13 +14,24 @@ function TeamComp(props) {
 
   const handleDeleteClick = async () => {
     try {
-      const response = await axios.delete(`/team/${teamData._id}`);
-      const newUserState = response.data.user;
-      setUserState(...userState, newUserState);
+      await axios.delete(`/team/${teamData._id}`);
+      // Call the function to fetch user data again to trigger re-render
+      fetchData();
     } catch (error) {
       console.error('Error deleting team:', error);
     }
   };
+  
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('/user'); // Fetch updated user data
+      const newUserState = response.data.user;
+      setUserState(newUserState);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+  
 
   return (
     <div className="border p-4 rounded shadow mb-4">
