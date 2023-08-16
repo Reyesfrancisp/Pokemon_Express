@@ -5,6 +5,26 @@ const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model i
 
 /*** Team routes ***/
 
+// GET route to fetch team data by team ID
+router.get('/team/:teamId', async (req, res) => {
+  try {
+    const teamId = req.params.teamId;
+
+    // Find the team by its ID
+    const team = await Team.findById(teamId);
+
+    if (!team) {
+      return res.status(404).json({ error: 'Team not found' });
+    }
+
+    // Return the team data
+    res.json(team);
+  } catch (error) {
+    console.error('Error fetching team data:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // Create a team
 router.post('/team', isAuthenticated, async (req, res) => {
 
@@ -46,7 +66,7 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
     if (!team) {
       return res.status(404).send('Team not found');
     }
-    
+
     // Extract the _id values of the Pokémon associated with the team
     const pokemonIds = [
       team.pokemon1,
@@ -83,34 +103,23 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
 });
 
 //Edit a team name
-router.put('/team/:teamId', isAuthenticated, async (req, res) => {
 
-  console.log("Got into the edit a pokemon team route.");
-  try {
+  router.put('/team/:teamId', isAuthenticated, async (req, res) => {
+    
+  console.log("Got into the edit a pokemon team name route.");
     const teamId = req.params.teamId;
-    const newTeamName = req.body.newTeamName; // Assuming the new name is sent in the request body
-
-    // Find the team to edit
-    const team = await Team.findById(teamId);
-
-    if (!team) {
-      return res.status(404).send('Team not found');
+    const updatedTeam = req.body;
+  
+    try {
+      // Find the team by ID and update its name
+      const updatedTeamData = await Team.findByIdAndUpdate(teamId, { name: updatedTeam.name }, { new: true });
+  
+      res.status(200).json(updatedTeamData);
+    } catch (error) {
+      console.error('Error updating team name:', error);
+      res.status(500).send('Server Error');
     }
-
-    // Edit the team name
-    team.name = newTeamName;
-
-    // Save the updated team
-    const updatedTeam = await team.save();
-
-    res.send({
-      team: updatedTeam,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
-  }
-});
+  });
 
 
 module.exports = router;

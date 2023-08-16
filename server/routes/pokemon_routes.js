@@ -3,6 +3,21 @@ const router = require('express').Router();
 const { isAuthenticated, validateToken } = require('../auth');
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
 
+//get pokemon that belongs to a team
+router.get('/fetch-pokemon/:pokemonIDs', async (req, res) => {
+  try {
+    const pokemonIDs = req.params.pokemonIDs.split(',');
+    
+    // Fetch the Pokémon data from the database based on the IDs
+    const pokemonData = await Pokemon.find({ _id: { $in: pokemonIDs } });
+
+    res.json(pokemonData);
+  } catch (error) {
+    console.error('Error fetching Pokémon data:', error);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
 
 // Create a pokemon that belongs to a team
 router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {

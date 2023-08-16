@@ -40,7 +40,7 @@ function TeamList(props) {
   }
 
   return (
-    <div>
+    <div className = "flex flex-col justify-center">
       <h2 className="text-center my-4 bg-teal-300">Below is a list of your teams, user!</h2>
       <button className="bg-green-500 text-white px-4 py-2 rounded-md mb-4" onClick={handleCreateTeam}>
         Create New Team

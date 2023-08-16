@@ -53,6 +53,8 @@ function App() {
 
       <Routes>
 
+      
+      <Route path="/" element={<Landing />} />
 
         <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
