@@ -67,8 +67,8 @@ function AuthForm(props) {
         isLogin: true
       });
 
-      // Redirect to dashboard
-      navigate('/dashboard');
+      // Redirect to team
+      navigate('/team');
     } catch (err) {
       setErrorMessage(err.response.data.message);
     }
@@ -97,7 +97,7 @@ function AuthForm(props) {
             errorMessage={errorMessage}
           />
         )}
-        
+
         <div className="flex items-center mt-4 justify-center ">
           <label htmlFor="login" className="mr-2 ">
             Login
