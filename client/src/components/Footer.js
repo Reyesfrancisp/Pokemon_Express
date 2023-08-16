@@ -22,7 +22,7 @@ function Footer() {
                 Pokedex Express
               </span>
             </a>
-            <ul className="flex flex-wrap items-center mt-2 text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400">
+            <ul className="flex flex-wrap items-center mt-2 text-xs md:text-sm font-medium text-white dark:text-white">
               <li>
                 <NavLink to="/about" className="mr-2 md:mr-4 hover:underline">
                   About
@@ -46,7 +46,7 @@ function Footer() {
             </ul>
         </div>
         <hr className="my-3 border-gray-200 md:my-4 dark:border-gray-700" />
-        <span className="block text-xxs md:text-xs text-gray-500 md:text-center dark:text-gray-400">
+        <span className="block text-xxs md:text-xs text-white md:text-center dark:text-gray-400">
           © {new Date().getFullYear()}{' '}
           <a
             href="https://github.com/Reyesfrancisp/pokemon_devdex"

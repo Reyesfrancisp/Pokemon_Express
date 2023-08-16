@@ -77,7 +77,7 @@ function AuthForm(props) {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold mb-4">
+      <h1 className="text-3xl mb-4 font-extrabold text-white">
         {formData.isLogin ? 'Log In' : 'Register'}
       </h1>
 
@@ -98,8 +98,8 @@ function AuthForm(props) {
           />
         )}
 
-        <div className="flex items-center mt-4 justify-center ">
-          <label htmlFor="login" className="mr-2 ">
+        <div className="flex items-center mt-4 justify-center">
+          <label htmlFor="login" className="mr-2">
             Login
           </label>
           <input

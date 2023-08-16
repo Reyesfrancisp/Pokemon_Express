@@ -45,35 +45,35 @@ function Header(props) {
         {/* Link to Home */}
         <NavLink
           to="/"
-          className="text-white-600 hover:text-gray-800"
+          className="text-white-600 hover:text-gray-200"
         >
           Home
         </NavLink>
         {/* Link to Teams */}
         <NavLink
           to="/teams"
-          className="text-white-600 hover:text-gray-800"
+          className="text-white-600 hover:text-gray-200"
         >
           Teams
         </NavLink>
-        <NavLink to="/search" className="text-white-600 hover:text-gray-800">
+        <NavLink to="/search" className="text-white-600 hover:text-gray-200">
           PokeDex
         </NavLink>
         {props.state.user ? (
           <>
-            {/* <NavLink to="/dashboard" className="text-white-600 hover:text-gray-800">
+            {/* <NavLink to="/dashboard" className="text-white-600 hover:text-gray-200">
               Dashboard
             </NavLink> */}
             <NavLink
               onClick={logout}
               to="/"
-              className="text-white-600 hover:text-gray-800"
+              className="text-white-600 hover:text-white"
             >
               Log Out
             </NavLink>
           </>
         ) : (
-          <NavLink to="/auth" className="text-white-600 hover:text-gray-800">
+          <NavLink to="/auth" className="text-white-600 hover:text-gray-200">
             Login
           </NavLink>
         )}
