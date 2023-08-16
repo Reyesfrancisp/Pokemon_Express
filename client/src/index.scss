@@ -19,6 +19,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.notFound {
+  height: 80vh;
+}
+
+header {
+  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
+  padding: 6px 3%;
+  color: #fff;
+}
+
+
+.active {
+  text-decoration: underline;
+}
+
+footer {
+  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
+  color: #fff;
+  overflow: hidden; /* Add this to hide overflowing content */
+
 h1, h2 {
   font-family: 'Alfa Slab One', cursive;
 }
