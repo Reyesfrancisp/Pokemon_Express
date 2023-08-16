@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios for API requests
 import getPokemonInfo from "./TeamQuery";
-import PokemonCard from "../../components/pokemonCard";
+import PokemonCard from "../../components/PokemonOutput"; 
 import TeamDisplay from "../../components/TeamDisplay";
 
 function TeamEdit(props) {
