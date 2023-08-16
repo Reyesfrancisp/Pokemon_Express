@@ -1,7 +1,9 @@
+import {NavLink} from 'react-router-dom';
+
 function Footer() {
   return (
-    <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-2 p-2 md:p-4 fixed bottom-0 w-full">
-      <div className="w-full max-w-screen-xl mx-auto">
+    <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-2 p-2 md:p-4 fixed bottom-0 w-full z-10">
+      <div className="w-full max-w-screen-xl mx-auto ">
         <div className="flex flex-col md:flex-row items-center justify-between">
         <a
               href="https://github.com/Reyesfrancisp/pokemon_devdex"
@@ -22,9 +24,9 @@ function Footer() {
             </a>
             <ul className="flex flex-wrap items-center mt-2 text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400">
               <li>
-                <a href="#" className="mr-2 md:mr-4 hover:underline">
+                <NavLink to="/about" className="mr-2 md:mr-4 hover:underline">
                   About
-                </a>
+                </NavLink>
               </li>
               <li>
                 <a href="#" className="mr-2 md:mr-4 hover:underline">
@@ -37,9 +39,9 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <NavLink to="/contact" className="hover:underline">
                   Contact
-                </a>
+                </NavLink>
               </li>
             </ul>
         </div>

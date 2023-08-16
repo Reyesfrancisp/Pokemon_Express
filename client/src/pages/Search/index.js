@@ -1,6 +1,7 @@
 import { useState } from "react";
 import getPokemonInfo from "./pokeApiQuery";
 import PokemonCard from "../../components/pokemonCard";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 function Search() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -48,7 +49,7 @@ function Search() {
   };
 
   return (
-    <div className="flex-col md:flex">
+    <div className="flex-col md:flex mb-40">
       <h1 className="text-3xl text-center font-semibold mb-4">Search Page</h1>
       <div className="flex flex-col items-center">
         <input
@@ -67,17 +68,17 @@ function Search() {
 
         <div className="flex justify-center items-center space-x-10 mt-4">
           <button
-            className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]"
+            className="py-2 px-4 text-white "
             onClick={previousPokemon}
           >
-            Previous
+            <FaArrowLeft /> 
           </button>
           <PokemonCard info={info} />
           <button
-            className="py-2 px-4 bg-blue-500 text-white hover:bg-blue-600 w-[150px]"
+            className="py-4 px-4 text-white "
             onClick={nextPokemon}
           >
-            Next
+            <FaArrowRight /> 
           </button>
         </div>
       </div>
