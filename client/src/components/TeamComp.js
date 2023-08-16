@@ -59,13 +59,13 @@ function TeamComp(props) {
 
   return (
     <div className="max-w-4xl mx-auto border p-4 rounded shadow mb-4">
-    <h2 className="text-xl font-semibold mb-4">{teamData.name}</h2>
+    <h2 className="text-xl font-semibold mb-4 text-center">{teamData.name}</h2>
     
     {/* Display up to 6 Pokémon */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {pokemonData.map((pokemon, index) => (
         <div key={index} className="border p-2 rounded shadow">
-          <h3 className="text-lg font-medium">{pokemon.name}</h3>
+          <h3 className="text-lg text-center font-medium">{pokemon.name}</h3>
           {/* Display other details if needed */}
         </div>
       ))}
