@@ -8,8 +8,10 @@ function Contact() {
     return (
         <div className="contact-container">
             <h1>Contact Us</h1>
-            <img src={contactImage} alt="Contact Us" className="contact-image" /> {/* Use the new image */}
-            <p>If you would like to get in touch with our team, feel free to reach out to us through the following channels:</p>
+            <img src={contactImage} alt="Contact Us" className="contact-image" />
+            <p className="bold-text">
+                If you would like to get in touch with our team, feel free to reach out to us through the following channels:
+            </p>
             <ul className="contact-list">
                 <li>
                     <a className="contact-button" href="https://github.com/Reyesfrancisp/pokemon_devdex" target="_blank" rel="noopener noreferrer">
