@@ -29,22 +29,9 @@ header {
   margin-bottom: 35px;
 }
 
-header nav {
-  p.header-username {
-    margin-right: 15px;
-  }
 
-  a {
-    color: #fff;
-    text-decoration: none;
-
-    &:not(:last-child) {
-      margin-right: 5px;
-    }
-  .active {
-    text-decoration: underline;
-  }
-}
+.active {
+  text-decoration: underline;
 }
 
 footer {
