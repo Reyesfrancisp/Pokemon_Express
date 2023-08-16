@@ -156,3 +156,50 @@ body {
   color: #333; /* Adjust the color */
   /* Add other styles as needed */
 }
+/* index.scss or any relevant SCSS file */
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  margin: 15px 0;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+  background-color: #0056b3;
+}
+
+.contact-message {
+  margin-top: 20px;
+  font-size: 18px; /* Adjust the font size */
+  color: #444; /* Adjust the text color */
+  max-width: 600px; /* Adjust the max-width as needed */
+  line-height: 1.5; /* Adjust the line height */
+}
