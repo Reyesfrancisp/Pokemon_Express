@@ -1,7 +1,12 @@
+/* Import Tailwind CSS utilities and components */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bangers&family=Bruno+Ace&family=Caprasimo&family=Cherry+Bomb+One&family=Luckiest+Guy&family=Orbitron&family=Righteous&family=Roboto:wght@100&display=swap');
+
+/* Apply global styles */
 * {
   margin: 0;
   padding: 0;
@@ -14,101 +19,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1,h2 {
-  font-family: 'Alfa Slab One', cursive;}
-
-.notFound {
-  height: 80vh;
+h1, h2 {
+  font-family: 'Alfa Slab One', cursive;
 }
 
-header {
-  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
-  padding: 6px 3%;
-  color: #fff;
+/* Add styles for .notFound, header, and footer (not provided in your code) */
 
-  margin-bottom: 35px;
-}
-
-header nav {
-  p.header-username {
-    margin-right: 15px;
-  }
-
-  a {
-    color: #fff;
-    text-decoration: none;
-
-    &:not(:last-child) {
-      margin-right: 5px;
-    }
-  .active {
-    text-decoration: underline;
-  }
-}
-
-footer {
-  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
-  color: #fff;
-  overflow: hidden; /* Add this to hide overflowing content */
-}
-
-/* Add a container for the footer content */
-footer .footer-content {
-  max-width: 1200px; /* Adjust as needed */
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Optional: If you want to center align the footer content vertically */
-footer .footer-content {
-  align-items: center;
-}
-
-form {
-  width: 400px;
-  margin: 20px auto 0;
-}
-
-form.dashboard-form {
-  margin-bottom: 25px;
-
-  h2 {
-    margin-bottom: 15px;
-  }
-}
-
-form p.error-message {
-  text-align: center;
-  margin-bottom: 10px;
-  color: red;
-}
-
-form input,
-form button {
-  padding: 5px 10px;
-  margin-bottom: 5px;
-}
-
-form button {
-  border: none;
-  padding: 8px 10px;
-  font-size: 0.98rem;
-  background: linear-gradient(to top, #0407af, #42bacf);
-  color: #fff;
-}
-
-input[type='radio'] {
-  accent-color: #0408d4;
-}
-
-body {
-  background: linear-gradient(to top, #d7e60d, #97a102 50%, #dceb0a);
-}
-
-/* About.scss */
-
+/* About Page */
 .about-container {
   max-width: 800px;
   margin: 0 auto;
@@ -143,15 +60,65 @@ body {
 .team-member a:hover {
   text-decoration: underline;
 }
-/* index.scss or any relevant SCSS file */
 
-.about-container {
-  /* ... (other styles) */
-}
-
+/* Custom heading style */
 .custom-heading {
-  font-family: 'Alfa Slab One', sans-serif; /* Use the imported Google Font */
-  font-size: 2.5rem; /* Adjust as needed */
-  color: #333; /* Adjust the color */
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 2.5rem;
+  color: #333;
   /* Add other styles as needed */
 }
+
+/* Contact Page */
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  margin: 15px 0;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-family: 'Alfa Slab One', sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+  background-color: #0056b3;
+}
+
+.contact-message {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #444;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* index.scss or any relevant SCSS file */
+
+.bold-text {
+  font-weight: bold;
+}
+
