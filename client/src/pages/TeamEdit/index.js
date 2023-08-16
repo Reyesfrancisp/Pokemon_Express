@@ -6,7 +6,7 @@ import TeamDisplay from "../../components/TeamDisplay";
 
 function TeamEdit(props) {
 
-    const { userState, setUserState, stateTracker, setStateTracker } = props;
+    const { setUserState, stateTracker, setStateTracker } = props;
     const {teamID} = stateTracker;
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -93,7 +93,7 @@ function TeamEdit(props) {
         <div className="flex-col md:flex">
             <h1 className="text-3xl text-center font-semibold mb-4">Team Page</h1>
             <div className="flex flex-col items-center">
-            <TeamDisplay teamData= {teamData}    />           
+            <TeamDisplay teamData= {teamData} setTeamData = {setTeamData} stateTracker = {stateTracker} setStateTracker = {setStateTracker}  />           
 
                 <button
                     className="bg-blue-500 text-white px-4 py-2 my-8 rounded-md"

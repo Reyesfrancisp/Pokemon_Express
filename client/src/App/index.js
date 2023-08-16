@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 // components
 import Header from '../components/Header';
@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
 import TeamList from '../pages/Team';
 import TeamEdit from '../pages/TeamEdit';
+import PokemonEdit from '../pages/PokemonEdit';
 
 function App() {
   const [state, setState] = useState({
@@ -47,7 +48,8 @@ function App() {
 
 
   return (
-    <>
+
+    <div className = "bg-slate-300 min-h-screen">
       <Header state={state} setState={setState} />
 
 
@@ -62,6 +64,8 @@ function App() {
 
         <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         
+        <Route path="/pokemon-edit" element={<PokemonEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
+        
 
         <Route path="/auth" element={(
           <Redirect user={state.user}>
@@ -74,7 +78,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
