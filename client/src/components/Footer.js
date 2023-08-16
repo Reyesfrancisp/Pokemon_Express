@@ -14,7 +14,7 @@ function Footer() {
               {/* Image placeholder */}
               <img
                 src="/finalLogo.png"
-                className="h-6 md:h-8 mr-2 md:mr-3"
+                className="rounded-full h-8 w-8 mr-4"
                 alt="Logo"
               />
               {/* Name of the app */}
