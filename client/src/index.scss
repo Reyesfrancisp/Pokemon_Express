@@ -25,6 +25,7 @@ header {
   background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
   padding: 6px 3%;
   color: #fff;
+
   margin-bottom: 35px;
 }
 
@@ -40,10 +41,8 @@ header nav {
     &:not(:last-child) {
       margin-right: 5px;
     }
-
-    &.active {
-      text-decoration: underline;
-    }
+  .active {
+    text-decoration: underline;
   }
 }
 

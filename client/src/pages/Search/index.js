@@ -49,7 +49,7 @@ function Search() {
   };
 
   return (
-    <div className="flex-col md:flex mb-40">
+    <div className="flex-col md:flex h-screen mb-40">
       <h1 className="text-3xl text-center font-extrabold text-white mb-4">Search Page</h1>
       <div className="flex flex-col items-center">
         <input
