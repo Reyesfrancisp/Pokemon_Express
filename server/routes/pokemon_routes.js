@@ -8,27 +8,61 @@ const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model i
 router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
     console.log("Got into create a pokemon that belongs to a team route.");
     try {
+        console.log("The team ID is : ", req.params.teamID);
         const teamId = req.params.teamID;
-        const newPokemonData = req.body; // Assuming the new Pokémon data is sent in the request body
-
+        const pkmnName = req.body.pokemonName;
+        console.log("The new pokemon data is: ", req.body.pokemonName);
         // Find the team
         const team = await Team.findById(teamId);
 
         if (!team) {
             return res.status(404).send('Team not found');
         }
+        console.log("The pokemon to be added is is : ", pkmnName);
+       
+        const newPokemon = new Pokemon({ name: pkmnName });
+        // Check if any of the pokemon properties is empty and add the new Pokémon
+        if (!team.pokemon1) {
+            console.log("pokemon 1");
+            team.pokemon1 = newPokemon;
+            console.log("Object returned from the team.pokemon 1 is: ", team.pokemon1);
+            await newPokemon.save();
+        } else if (!team.pokemon2) {
+            console.log("pokemon 2");
+            team.pokemon2 = newPokemon;
+            await newPokemon.save();
+        } else if (!team.pokemon3) {
+            console.log("pokemon 3");
+            team.pokemon3 = newPokemon;
+            await newPokemon.save();
+        } else if (!team.pokemon4) {
+            console.log("pokemon 4");
+            team.pokemon4 = newPokemon;
+            await newPokemon.save();
+        } else if (!team.pokemon5) {
+            console.log("pokemon 5");
+            team.pokemon5 = newPokemon;
+            await newPokemon.save();
+        } else if (!team.pokemon6) {
+            console.log("pokemon 6");
+            team.pokemon6 = newPokemon;
+            await newPokemon.save();
+        } else {
+            // Handle the case when all slots are filled
+            return res.status(400).json({ error: 'All Pokémon slots are filled' });
+        }
 
-        // Create a new Pokémon using the provided data
-        const newPokemon = new Pokemon(newPokemonData);
-
-        // Add the new Pokémon to the team's pokemon array
-        team.pokemon.push(newPokemon);
-
-        // Save the updated team (and automatically the related Pokémon)
+        // Save the updated team
         await team.save();
 
+        // Find the user and update the user's teams array
+        const user = await User.findByIdAndUpdate(
+            req.user._id,
+            { new: true }
+        ).populate('teams');
+
         res.send({
-            team,
+            user,
         });
     } catch (error) {
         console.error(error);
@@ -37,12 +71,12 @@ router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
 });
 
 // Delete a pokemon that belongs to a team
-router.delete('/team/:teamID/pokemon/:pokemonID', isAuthenticated, async (req, res) => {
+router.delete('/team/:teamID/pokemon/:pkmnName', isAuthenticated, async (req, res) => {
 
     console.log("Got into the delete a pokemon that belongs to a team route.");
     try {
         const teamId = req.params.teamID;
-        const pokemonId = req.params.pokemonID;
+        const pkmnName = req.params.pkmnName;
 
         // Find the team
         const team = await Team.findById(teamId);
@@ -52,7 +86,7 @@ router.delete('/team/:teamID/pokemon/:pokemonID', isAuthenticated, async (req, r
         }
 
         // Find the index of the Pokémon to delete within the team's pokemon array
-        const pokemonIndex = team.pokemon.findIndex(pokemon => pokemon._id.toString() === pokemonId);
+        const pokemonIndex = team.pokemon.findIndex(pokemon => pokemon._id.toString() === pkmnName);
 
         if (pokemonIndex === -1) {
             return res.status(404).send('Pokemon not found');

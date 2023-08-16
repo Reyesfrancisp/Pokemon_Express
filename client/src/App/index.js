@@ -26,9 +26,12 @@ function App() {
     user: "",
     teams: [],
     favorites: [],
+  })
+
+  const [stateTracker, setStateTracker] = useState({
     teamID: "",
     pokemonID: "",
-    moveID: "",
+    moveID: ""
   })
 
   useEffect(() => {
@@ -55,11 +58,11 @@ function App() {
       <Routes>
 
 
-        <Route path="/search" element={<Search state={userState} setState={setUserState}/>} />
+        <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
-        <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState}/>} />
+        <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
 
-        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState}/>} />
+        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         
         <Route path="/" element={<Landing />} />
 

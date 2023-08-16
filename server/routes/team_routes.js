@@ -38,16 +38,17 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
   console.log("Got into the delete a team route.");
   try {
     const teamId = req.params.teamId;
-
+    console.log("The team id to be deleted: " , teamId);
     // Find the team to delete
     const team = await Team.findById(teamId);
 
+    console.log("team to be deleted: ", team );
     if (!team) {
       return res.status(404).send('Team not found');
     }
 
     // Delete the team (triggers team schema's pre-remove middleware)
-    await team.remove();
+    await team.deleteOne();
 
     // Find the user and update the user's teams array to remove the deleted team's ID
     const user = await User.findByIdAndUpdate(
