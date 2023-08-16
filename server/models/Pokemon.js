@@ -8,41 +8,46 @@ const pokemonSchema = new Schema({
     },
     move1: {
         type: Schema.Types.ObjectId,
-        ref: 'Move'
+        ref: 'Move',
+        default: null
     },
     move2: {
         type: Schema.Types.ObjectId,
-        ref: 'Move' 
+        ref: 'Move',
+        default: null
     },
     move3: {
         type: Schema.Types.ObjectId,
-        ref: 'Move'
+        ref: 'Move',
+        default: null
     },
     move4: {
         type: Schema.Types.ObjectId,
-        ref: 'Move'
+        ref: 'Move',
+        default: null
+
     }
 });
 
 pokemonSchema.path('move1').validate(function(value) {
-  return checkUniqueMove(this, value);
+  return !value || checkUniqueMove(this, value);
 }, 'Duplicate move found in the same Pokémon');
 
 pokemonSchema.path('move2').validate(function(value) {
-  return checkUniqueMove(this, value);
+  return !value || checkUniqueMove(this, value);
 }, 'Duplicate move found in the same Pokémon');
 
 pokemonSchema.path('move3').validate(function(value) {
-  return checkUniqueMove(this, value);
+  return !value || checkUniqueMove(this, value);
 }, 'Duplicate move found in the same Pokémon');
 
 pokemonSchema.path('move4').validate(function(value) {
-  return checkUniqueMove(this, value);
+  return !value || checkUniqueMove(this, value);
 }, 'Duplicate move found in the same Pokémon');
 
 function checkUniqueMove(pokemon, moveId) {
   const moves = [pokemon.move1, pokemon.move2, pokemon.move3, pokemon.move4];
-  const uniqueMoves = new Set(moves.filter(move => move !== undefined));
+  const uniqueMoves = new Set(moves.filter(move => move !== undefined && move !== null));
 
   return uniqueMoves.size === moves.length;
 }
