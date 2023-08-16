@@ -22,29 +22,10 @@ height: 80vh;
 
 header {
   background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
-
-
-
-
   padding: 6px 3%;
   color: #fff;
-  margin-bottom: 35px;
-  nav {
-    p.header-username {
-      margin-right: 15px;
-    }
-    a {
-        color: #fff;
-        text-decoration: none;
-    
-        &:not(:last-child) {
-          margin-right: 5px;
-        }
-    
-        &.active {
-          text-decoration: underline;
-        }
-      }
+  .active {
+    text-decoration: underline;
   }
 }
 
