@@ -42,12 +42,19 @@ function Header(props) {
             </span>
           </p>
         )}
-        {/* Name this NavLink based on the users logging status */}
+        {/* Link to Home */}
         <NavLink
-          to={props.state.user ? "/teams" : "/"}
+          to="/"
           className="text-white-600 hover:text-gray-800"
         >
-          {props.state.user ? "Teams" : "Home"}
+          Home
+        </NavLink>
+        {/* Link to Teams */}
+        <NavLink
+          to="/teams"
+          className="text-white-600 hover:text-gray-800"
+        >
+          Teams
         </NavLink>
         <NavLink to="/search" className="text-white-600 hover:text-gray-800">
           PokeDex
