@@ -25,10 +25,14 @@ function App() {
     user: "",
     teams: [],
     favorites: [],
+  })
+
+  const [stateTracker, setStateTracker] = useState({
     teamID: "",
     pokemonID: "",
     moveID: "",
   });
+
 
   useEffect(() => {
     axios.get('/authenticated')
@@ -50,7 +54,7 @@ function App() {
       <Routes>
 
 
-        <Route path="/search" element={<Search state={userState} setState={setUserState}/>} />
+        <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
         {/* go to /team if logged in, otherwise go to the Landing page*/}
         {state.user ? (
@@ -66,7 +70,7 @@ function App() {
           <Route path="/team" element={<Navigate to="/auth" />} />
         )}
 
-        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState}/>} />
+        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         
 
         <Route path="/auth" element={(

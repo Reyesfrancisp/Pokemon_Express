@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TeamComp from '../../components/TeamComp';
 
-function TeamList({ userState, setUserState }) {
+function TeamList(props) {
+  const { userState, setUserState, stateTracker, setStateTracker } = props;
+  console.log("This is the userState in the Team List: ", userState);
   const { teams } = userState;
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +47,7 @@ function TeamList({ userState, setUserState }) {
       </button>
 
       {teams.length > 0 && teams.map((team, index) => (
-        <TeamComp key={index} teamData={team} />
+        <TeamComp key={index} teamData={team} userState = {setUserState} setUserState = {setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker} />
       ))}
 
     </div>
