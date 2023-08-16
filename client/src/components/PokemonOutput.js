@@ -1,11 +1,11 @@
 import React from 'react';
 
-function PokemonCard({info}) {
+function PokemonCard({ info }) {
   return (
     <div className="flex justify-center bg-white my-5">
-      <div className="relative max-w-md bg-gray-200 rounded-lg overflow-hidden shadow-md">
-        <div className="absolute z-0 top-2 left-10 w-full h-2/3 bg-gradient-to-r from-slate-600 to-white rotate-6"></div>
-        <div className="absolute z-1 top-32 transform -translate-x-2 w-full h-2/3 bg-gradient-to-br from-teal-600 to-white rotate-6"></div>
+      <div className="relative max-w-md bg-gray-200 rounded-lg overflow-hidden shadow-md ">
+        <div className="absolute z-0 top-2 left-2 w-full h-full bg-gradient-to-r from-slate-600 to-white rotate-6"></div>
+        <div className="absolute z-0 top-2 right-2 w-full h-full bg-gradient-to-br from-teal-600 to-white rotate-6"></div>
         <img
           src={`https://assets.pokemon.com/assets/cms2/img/pokedex/full/${info.formattedID}.png`}
           alt="Pokemon from the search bar"
@@ -22,6 +22,6 @@ function PokemonCard({info}) {
       </div>
     </div>
   );
-};
+}
 
 export default PokemonCard;
