@@ -50,7 +50,7 @@ function App() {
 
   return (
 
-    <div className = "bg-slate-300 min-h-screen min-w-screen">
+    <div className = "min-h-screen min-w-screen">
       <Header state={state} setState={setState} />
 
 

@@ -21,7 +21,11 @@ height: 80vh;
 }
 
 header {
-  background: linear-gradient(to top, #3a3838, #b9b1b1);
+  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
+
+
+
+
   padding: 6px 3%;
   color: #fff;
   margin-bottom: 35px;
@@ -44,6 +48,10 @@ header {
   }
 }
 
+footer {
+  background: linear-gradient(to top, #20cfcf, #0d6aa8, #20cfcf);
+  color: #fff;
+}
 
 
 
@@ -69,11 +77,19 @@ form {
     border: none;
     padding: 8px 10px;
     font-size: .98rem;
-    background: linear-gradient(to top, #3a3838, #b9b1b1);;
+    background: linear-gradient(to top, #0407af, #42bacf);
     color: #fff;
   }
 }
 
 input[type='radio'] {
-  accent-color: #232323;
+  accent-color:  #0408d4;
+}
+
+body {
+  background: linear-gradient(to top, #d7e60d, #97a102 50%, #dceb0a);
+
+
+
+  // background: linear-gradient(to top, #b0b303 10%, #cad61b, #eaec5fb9);
 }
