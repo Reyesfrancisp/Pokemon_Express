@@ -50,18 +50,13 @@ function App() {
 
   return (
 
-    <div className = "bg-slate-300 min-h-screen min-w-screen">
+    <div className = "min-h-screen min-w-screen">
       <Header state={state} setState={setState} />
 
 
       <Routes>
 
-        {/* go to /team if logged in, otherwise go to the Landing page*/}
-        {state.user ? (
-          <Route path="/" element={<Navigate to="/teams" />} />
-        ) : (
-          <Route path="/" element={<Landing />} />
-        )}
+      <Route path="/" element={<Landing />} />
 
         {/* go to /auth if not logged in, otherwise /team */}
         {state.user ? (
