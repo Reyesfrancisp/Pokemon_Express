@@ -6,10 +6,11 @@ import RegisterForm from './RegisterForm';
 
 function AuthForm(props) {
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
+    username: '',
+    identifier: '',
     password: '',
-    confirmPassword: '',  
+    confirmPassword: '',
     isLogin: true
   });
 
@@ -40,16 +41,16 @@ function AuthForm(props) {
       setErrorMessage('Passwords do not match');
       return;
     }
-  
+
     let url = '/login';  // Default to login endpoint
-  
+
     if (!formData.isLogin) {
       url = '/register';  // Change to register endpoint if not logging in
     }
-  
+
     try {
       const res = await axios.post(url, formData);
-  
+
       props.setState((oldState) => {
         return {
           ...oldState,
@@ -58,19 +59,21 @@ function AuthForm(props) {
       });
       setErrorMessage('');
       setFormData({
-        username: '',
         email: '',
+        username: '',
+        identifier: '',
         password: '',
+        confirmPassword: '',
         isLogin: true
       });
-  
-      // Redirect to dashboard
-      navigate('/dashboard');
+
+      // Redirect to team
+      navigate('/team');
     } catch (err) {
       setErrorMessage(err.response.data.message);
     }
   };
-  
+
 
   return (
     <div className="flex flex-col items-center justify-center">
