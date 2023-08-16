@@ -68,7 +68,7 @@ function AuthForm(props) {
       });
 
       // Redirect to team
-      navigate('/team');
+      navigate('/teams');
     } catch (err) {
       setErrorMessage(err.response.data.message);
     }
