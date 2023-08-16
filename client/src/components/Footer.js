@@ -47,16 +47,16 @@ function Footer() {
         </div>
         <hr className="my-3 border-gray-200 md:my-4 dark:border-gray-700" />
         <span className="block text-xxs md:text-xs text-gray-500 md:text-center dark:text-gray-400">
-        © {new Date().getFullYear()}{' '}
-            <a
-              href="https://github.com/Reyesfrancisp/pokemon_devdex"
-              className="hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              App Name™
-            </a>
-            . All Rights Reserved.
+          © {new Date().getFullYear()}{' '}
+          <a
+            href="https://github.com/Reyesfrancisp/pokemon_devdex"
+            className="hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            App Name™
+          </a>
+          . All Rights Reserved.
         </span>
       </div>
     </footer>

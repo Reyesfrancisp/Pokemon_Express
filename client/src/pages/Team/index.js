@@ -41,21 +41,22 @@ function TeamList(props) {
   }
 
   return (
-    <div className = "flex flex-col justify-center">
-      <h2 className="text-center my-4 bg-teal-300">Below is a list of your teams, {username}!</h2>
-      <div className="flex justify-center">
-  <button
-    className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-md shadow-md mb-4"
-    onClick={handleCreateTeam}
-  >
-    Create New Team
-  </button>
-</div>
-
-
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-2xl lg:text-4xl font-semibold text-center my-4 text-blue-900">
+        Welcome to Your Pokemon Teams, {username}!
+      </h2>
+      <button
+        className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-md shadow-md max-w-md mb-4"
+        onClick={handleCreateTeam}
+      >
+        Create New Team
+      </button>
+      <p className="text-l lg:text-xl text-gray-700 text-center mb-8">
+        Here's a list of your teams:
+      </p>
 
       {teams.length > 0 && teams.map((team, index) => (
-        <TeamComp key={index} teamData={team} userState = {setUserState} setUserState = {setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker} />
+        <TeamComp key={index} teamData={team} userState={setUserState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />
       ))}
 
     </div>
