@@ -11,13 +11,13 @@ function Footer() {
             >
               {/* Image placeholder */}
               <img
-                src="https://placehold.co/600x400"
+                src="/finalLogo.png"
                 className="h-6 md:h-8 mr-2 md:mr-3"
                 alt="Logo"
               />
               {/* Name of the app */}
               <span className="self-center text-xl md:text-2xl font-semibold whitespace-nowrap dark:text-white">
-                Our App Name
+                Pokedex Express
               </span>
             </a>
             <ul className="flex flex-wrap items-center mt-2 text-xs md:text-sm font-medium text-gray-500 dark:text-gray-400">
