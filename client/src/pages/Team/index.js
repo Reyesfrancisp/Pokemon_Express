@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import TeamComp from '../../components/TeamComp';
+import LoadingSpinner from '../../components/Loading';
 
 function TeamList(props) {
   const { userState, setUserState, stateTracker, setStateTracker } = props;
   console.log("This is the userState in the Team List: ", userState);
-  const { teams } = userState;
+  const { username, teams } = userState;
   const [loading, setLoading] = useState(true);
 
   const handleCreateTeam = async () => {
@@ -33,18 +34,25 @@ function TeamList(props) {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures it runs only once on mount
+  }, [setUserState]); // Empty dependency array ensures it runs only once on mount
 
   if (loading) {
-    return <p>Loading...</p>; // You can show a loading modal here
+    return <LoadingSpinner />; // You can show a loading modal here
   }
 
   return (
-    <div>
-      <h2 className="text-center my-4 bg-teal-300">Below is a list of your teams, user!</h2>
-      <button className="bg-green-500 text-white px-4 py-2 rounded-md mb-4" onClick={handleCreateTeam}>
-        Create New Team
-      </button>
+    <div className = "flex flex-col justify-center">
+      <h2 className="text-center my-4 bg-teal-300">Below is a list of your teams, {username}!</h2>
+      <div className="flex justify-center">
+  <button
+    className="bg-green-500 hover:bg-green-600 text-white py-2 px-6 rounded-md shadow-md mb-4"
+    onClick={handleCreateTeam}
+  >
+    Create New Team
+  </button>
+</div>
+
+
 
       {teams.length > 0 && teams.map((team, index) => (
         <TeamComp key={index} teamData={team} userState = {setUserState} setUserState = {setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker} />

@@ -23,7 +23,7 @@ function Header(props) {
   return (
     <header className="flex justify-between items-center py-4 px-6 bg-white border-b dark:bg-gray-900">
       <h3 className="text-xl font-semibold">
-        <NavLink to={props.state.user ? '/team' : '/'}>Pokemon App</NavLink>
+        <NavLink to={props.state.user ? '/' : '/'}>Pokemon App</NavLink>
       </h3>
 
       <nav className="flex items-center space-x-4">
@@ -36,10 +36,10 @@ function Header(props) {
           </p>
         )}
         <NavLink
-          to={props.state.user ? '/team' : '/'}
+          to={props.state.user ? '/teams' : '/'}
           className="text-white-600 hover:text-gray-800"
         >
-          Home
+          Teams
         </NavLink>
         <NavLink
           to="/search"

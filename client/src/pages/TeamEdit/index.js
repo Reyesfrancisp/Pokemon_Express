@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios for API requests
 import getPokemonInfo from "./TeamQuery";
-import PokemonCard from "../../components/pokemonCard";
+import PokemonCard from "../../components/PokemonCard";
+import TeamDisplay from "../../components/TeamDisplay";
 
 function TeamEdit(props) {
 
-    const { userState, setUserState, stateTracker, setStateTracker } = props;
-
+    const { setUserState, stateTracker, setStateTracker } = props;
     const {teamID} = stateTracker;
 
     const [searchQuery, setSearchQuery] = useState("");
     const [info, setInfo] = useState({
         formattedID: "151",
-        pokemonName: "Mew",
+        pokemonName: "mew",
         pokemonID: "151",
         pokemonHeight: "1'4\"",
         pokemonWeight: "8.81",
         type1: "Psychic",
         type2: "",
     });
+
+    
+        const [teamData, setTeamData] = useState({
+            name: "Example"
+        });
+      
+        useEffect(() => {
+            console.log("using effect on teamedit");
+          const fetchTeamData = async () => {
+            try {
+              const response = await axios.get(`/team/${teamID}`);
+              console.log(response.data);
+              setTeamData(response.data); // Assuming the response contains the team data
+            } catch (error) {
+              console.error('Error fetching team data:', error);
+            }
+          };
+      
+          fetchTeamData();
+        }, [teamID]);
 
     const addPokemonToTeam = async (teamID, name) => {
         try {
@@ -27,6 +47,10 @@ function TeamEdit(props) {
             const response = await axios.post(`/team/${teamID}/pokemon`, { pokemonName: name });
             const newUserState = response.data.user;
             setUserState(newUserState);
+            const teamResponse = await axios.get(`/team/${teamID}`);
+            console.log("The team response data is: ", teamResponse.data);
+            setTeamData(teamResponse.data);
+            
         } catch (error) {
             console.error('Error adding a Pokemon:', error);
         }
@@ -67,21 +91,9 @@ function TeamEdit(props) {
 
     return (
         <div className="flex-col md:flex">
-            <h1 className="text-3xl text-center font-semibold mb-4">Search Page</h1>
+            <h1 className="text-3xl text-center font-semibold mb-4">Team Page</h1>
             <div className="flex flex-col items-center">
-                <input
-                    className="px-4 py-2  border border-gray-300"
-                    type="text"
-                    placeholder="Search Pokemon"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                <button
-                    className="px-4 py-2 mt-4 bg-blue-500 text-white hover:bg-blue-600"
-                    onClick={handleSearch}
-                >
-                    Search
-                </button>
+            <TeamDisplay teamData= {teamData} setTeamData = {setTeamData} stateTracker = {stateTracker} setStateTracker = {setStateTracker}  />           
 
                 <button
                     className="bg-blue-500 text-white px-4 py-2 my-8 rounded-md"
@@ -104,6 +116,19 @@ function TeamEdit(props) {
                         Next
                     </button>
                 </div>
+                <input
+                    className="px-4 py-2  border border-gray-300"
+                    type="text"
+                    placeholder="Search Pokemon"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button
+                    className="px-4 py-2 mt-4 bg-blue-500 text-white hover:bg-blue-600"
+                    onClick={handleSearch}
+                >
+                    Search
+                </button>
             </div>
         </div>
     );

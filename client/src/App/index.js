@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
 // components
 import Header from '../components/Header';
@@ -13,6 +13,7 @@ import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
 import TeamList from '../pages/Team';
 import TeamEdit from '../pages/TeamEdit';
+import PokemonEdit from '../pages/PokemonEdit';
 
 function App() {
   const [state, setState] = useState({
@@ -47,30 +48,23 @@ function App() {
 
 
   return (
-    <>
+
+    <div className = "bg-slate-300 min-h-screen">
       <Header state={state} setState={setState} />
 
 
       <Routes>
 
+      
+      <Route path="/" element={<Landing />} />
 
         <Route path="/search" element={<Search state={state} setState={setState}/>} />
 
-        {/* go to /team if logged in, otherwise go to the Landing page*/}
-        {state.user ? (
-          <Route path="/" element={<Navigate to="/team" />} />
-        ) : (
-          <Route path="/" element={<Landing />} />
-        )}
-
-        {/* go to /auth if not logged in, otherwise /team */}
-        {state.user ? (
-          <Route path="/team" element={<TeamList userState={userState} setUserState={setUserState} />} />
-        ) : (
-          <Route path="/team" element={<Navigate to="/auth" />} />
-        )}
+        <Route path="/teams" element={<TeamList userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
 
         <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
+        
+        <Route path="/pokemon-edit" element={<PokemonEdit userState={userState} setUserState={setUserState} stateTracker = {stateTracker} setStateTracker = {setStateTracker}/>} />
         
 
         <Route path="/auth" element={(
@@ -84,7 +78,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </>
+    </div>
   );
 }
 
