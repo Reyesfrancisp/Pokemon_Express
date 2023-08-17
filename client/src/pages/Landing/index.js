@@ -4,6 +4,7 @@ import PokemonCard from '../../components/PokemonOutput';
 import LoadingSpinner from '../../components/Loading';
 import getPokemonInfo from '../Search/pokeApiQuery';
 import DancingPokemon from '../../components/DancingPokemon';
+import {NavLink} from 'react-router-dom';
 
 // Displays each letter of the text
 function TypingEffect({ text }) {
@@ -68,8 +69,7 @@ function Landing() {
     <main className="landing bg-cover bg-center h-screen flex items-center mt-40 mb-40">
       <div className="mx-auto text-center">
         <DancingPokemon />
-
-      
+        
         <TypingEffect text={welcomeText} />
 
         <p className="text-lg md:text-xl text-black mb-8">
@@ -78,9 +78,36 @@ function Landing() {
 
         <PokemonCard info={pokemonInfo} />
 
-        <button href="/search" className="bg-blue-600 text-white my-5 px-6 py-3 rounded-lg text-lg md:text-xl hover:bg-blue-500 transition duration-300 ease-in-out">
-          Explore Now
-        </button>
+
+        <motion.div
+          className="box"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        >
+          <NavLink
+            to="/search"
+            className="text-white px-3 py-2 rounded-md text-sm font-medium"
+          >
+            <button href="" className="bg-blue-600 text-white my-5 px-6 py-3 rounded-lg text-lg md:text-xl hover:bg-blue-500 transition duration-300 ease-in-out">
+            Explore Now
+            </button>
+          </NavLink>
+        </motion.div>
+        <motion.div
+          className="box"
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        >
+          <NavLink
+            to="/auth"
+            className="text-white px-3 py-2 rounded-md text-sm font-medium"
+          >
+            <button href="" className="bg-blue-600 text-white my-5 px-6 py-3 rounded-lg text-lg md:text-xl hover:bg-blue-500 transition duration-300 ease-in-out">
+            Register
+            </button>
+          </NavLink>
+        </motion.div>
+
       </div>
     </main>
   );
