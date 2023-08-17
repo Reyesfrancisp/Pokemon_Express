@@ -4,9 +4,51 @@ import axios from 'axios';
 import MoveInfo from "../../components/MoveInfo";
 import LoadingSpinner from "../../components/Loading";
 import getPokemonMoves from "./movesApiQuery";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+
+import bug from "../../images/types/bug.png";
+import dark from "../../images/types/dark.png";
+import dragon from "../../images/types/dragon.png";
+import electric from "../../images/types/electric.png";
+import fairy from "../../images/types/fairy.png";
+import fighting from "../../images/types/fighting.png";
+import fire from "../../images/types/fire.png";
+import flying from "../../images/types/flying.png";
+import ghost from "../../images/types/ghost.png";
+import grass from "../../images/types/grass.png";
+import ground from "../../images/types/ground.png";
+import ice from "../../images/types/ice.png";
+import normal from "../../images/types/normal.png";
+import poison from "../../images/types/poison.png";
+import psychic from "../../images/types/psychic.png";
+import rock from "../../images/types/rock.png";
+import steel from "../../images/types/steel.png";
+import water from "../../images/types/water.png";
 
 function PokemonEdit(props) {
+
+  const typeImages = {
+    bug,
+    dark,
+    dragon,
+    electric,
+    fairy,
+    fighting,
+    fire,
+    flying,
+    ghost,
+    grass,
+    ground,
+    ice,
+    normal,
+    poison,
+    psychic,
+    rock,
+    steel,
+    water,
+  };
+
+
   const { userState, setUserState, stateTracker, setStateTracker } = props;
 
   console.log("State tracker in pokemon edit page: ", stateTracker);
@@ -83,6 +125,10 @@ function PokemonEdit(props) {
       console.error('Error deleting move:', error);
     }
   };
+  const navigate = useNavigate();
+  const handleBackButtonClick = () => {
+    navigate('/team-edit');
+};
 
 
 
@@ -105,22 +151,44 @@ function PokemonEdit(props) {
 
     console.log("Pokemon moves of the current pokemon are: ", pokemonMoves);
     return (
-      <div className="bg-gray-300 p-8 rounded-md shadow-md">
+      <div className="text-center p-8 rounded-md shadow-md flex flex-col">
+        <button
+          className="bg-white hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 my-4 rounded-md shadow-md w-28"
+          style={{ marginLeft: 'calc(25% - 8px)', marginTop: '20px' }}
+          onClick={handleBackButtonClick}
+        >
+          Back
+        </button>
 
-        <h2 className="text-center text-3xl font-semibold mb-4">Pokemon: <span className=" capitalize italic">{pokemonName.name}</span></h2>
+        <h3 className="text-3xl text-white font-semibold mb-4">Pokemon: <span className=" capitalize italic font-bold">{pokemonName.name}</span></h3>
 
 
+        <section className="bg-black text-white p-4 rounded shadow-md max-w-xl w-full mx-auto">
 
+          <h3 className="text-lg font-semibold mb-2">Saved Moves:</h3>
 
-        <section>
-          <p> Saved Moves: </p>
           {pokemonMoves.moves.map((move, index) => (
-            <div key={index}>
+            <div key={index} className="mb-2">
               {move && (
-                <p>
-                  Move {index + 1}: {move?.name} Type: {move?.type}
-                  <button onClick={() => deleteMove(move)}>Delete</button>
-                </p>
+                <div className="flex flex-col justify-center items-center">
+                  <p className="text-base capitalize mr-2">
+                    Move {index + 1}: {move?.name}
+                  </p>
+                  <p className="text-md capitalize">Type: {move.type}
+
+                  </p>
+                  <img
+                    src={typeImages[move.type.toLowerCase()]} // Assuming move.type is the type name
+                    alt={`${move.type} type`}
+                    className="w-10 h-10 m-2"
+                  />
+                  <button
+                    onClick={() => deleteMove(move)}
+                    className="ml-auto bg-red-500 hover:bg-red-600 text-white text-sm mr-4 px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
               )}
             </div>
           ))}
@@ -128,8 +196,7 @@ function PokemonEdit(props) {
 
 
 
-
-        <h2 className="text-center text-2xl mb-2">Movelist</h2>
+        <h2 className="text-center text-2xl my-4">Movelist</h2>
 
         {moves.length > 0 && (
           <ul>
