@@ -54,6 +54,7 @@ const getPokemonInfo = async (input) => {
 
     const parsedData = await response.json();
     const pokemon = parsedData.data.pokemon_v2_pokemon[0];
+    console.log("Pokemon in the search: " ,pokemon);
     const pokemonName = pokemon.name;
     const pokemonID = pokemon.id;
     const heightInInches = pokemon.height * 4;

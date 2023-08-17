@@ -1,8 +1,32 @@
-
+const deleteFunctions = require('./delete'); // Adjust the path accordingly
+const { deleteAssociatedMoves } = deleteFunctions;
 const router = require('express').Router();
 const { isAuthenticated, validateToken } = require('../auth');
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
 
+
+//get request to get the pokemon name associated with the _id passed
+router.post('/getPokemonName', async (req, res) => {
+  
+  try{
+  const { pokemonID } = req.body;
+
+  console.log ("The pokemon ID in the backend to get the name is: ", pokemonID)
+
+  // Find the Pokémon name based on the provided pokemonID
+  const pokemon = await Pokemon.findOne( {_id: pokemonID});
+
+  if (!pokemon) {
+    return res.status(404).json({ message: 'Pokemon not found' });
+  } 
+
+  res.status(200).json({ pokemonName: pokemon.name });
+}
+  catch (err) {
+    console.error(err);
+    res.status(500).send(err);
+  }
+});
 
 // get pokemon that belongs to a team
 router.post('/fetch-pokemon', async (req, res) => {
@@ -70,8 +94,6 @@ router.post('/team/:teamID/pokemon/', isAuthenticated, async (req, res) => {
       await newPokemon.save();
     } else {
       console.log("Cannot add pokemon, all slots are filled");
-      // Handle the case when all slots are filled
-      return res.status(400).json({ error: 'All Pokémon slots are filled' });
     }
 
     // Save the updated team
@@ -121,11 +143,17 @@ router.delete('/delete-pokemon', isAuthenticated, async (req, res) => {
       return res.status(404).send('Pokemon not found in team');
     }
 
-    // Save the updated team
-    await team.save();
+   // Find the Pokémon to get the move IDs
+   const pokemon = await Pokemon.findById(pokemonID);
 
-    // Delete the Pokémon from the database
-    await Pokemon.findByIdAndDelete(pokemonID);
+   if (!pokemon) {
+     return res.status(404).send('Pokemon not found');
+   }
+
+   deleteAssociatedMoves(pokemon);
+
+   // Delete the Pokémon from the database
+   await Pokemon.findByIdAndDelete(pokemonID);
 
     res.send({
       team,

@@ -90,7 +90,7 @@ function TeamEdit(props) {
     };
 
     return (
-        <div className="flex-col md:flex">
+        <div className="flex-col md:flex my-8">
             <h1 className="text-3xl text-center font-semibold mb-4">Team Page</h1>
             <div className="flex flex-col items-center">
                 <TeamDisplay teamData={teamData} setTeamData={setTeamData} stateTracker={stateTracker} setStateTracker={setStateTracker} />

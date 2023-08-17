@@ -1,4 +1,7 @@
 
+const deleteFunctions = require('./delete'); // Adjust the path accordingly
+const { deleteAssociatedMoves, deletePokemonAndRemoveFromTeam } = deleteFunctions;
+
 const router = require('express').Router();
 const { isAuthenticated, validateToken } = require('../auth');
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
@@ -54,11 +57,11 @@ router.post('/team', isAuthenticated, async (req, res) => {
 
 // Delete a team
 router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
-
   console.log("Got into the delete a team route.");
   try {
     const teamId = req.params.teamId;
     console.log("The team id to be deleted: ", teamId);
+
     // Find the team to delete
     const team = await Team.findById(teamId);
 
@@ -77,9 +80,14 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
       team.pokemon6
     ].filter(pokemonId => pokemonId); // Filter out any empty IDs
 
-    // Delete associated Pokémon documents
-    await Pokemon.deleteMany({ _id: { $in: pokemonIds } });
-
+     // Call the function to delete Pokémon and associated moves for each Pokémon
+     for (const pokemonId of pokemonIds) {
+      const pokemon = await Pokemon.findById(pokemonId);
+      if (pokemon) {
+        await deletePokemonAndRemoveFromTeam(team, pokemonId);
+        await deleteAssociatedMoves(pokemon);
+      }
+    }
 
     // Delete the team (triggers team schema's pre-remove middleware)
     await team.deleteOne();
@@ -101,6 +109,7 @@ router.delete('/team/:teamId', isAuthenticated, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
 
 //Edit a team name
 

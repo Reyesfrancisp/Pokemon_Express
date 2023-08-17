@@ -69,7 +69,7 @@ function Search() {
         <div className="flex justify-center items-center space-x-10 mt-4">
 
           <button
-            className="py-2 px-4 text-white "
+            className="py-2 px-4 text-white bg-black"
             onClick={previousPokemon}
           >
             <FaArrowLeft /> 
@@ -80,7 +80,7 @@ function Search() {
 
 
           <button
-            className="py-4 px-4 text-white "
+            className="py-2 px-4 text-white bg-black "
             onClick={nextPokemon}
           >
             <FaArrowRight /> 

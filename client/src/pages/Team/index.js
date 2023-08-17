@@ -36,6 +36,7 @@ function TeamList(props) {
     fetchData();
   }, [setUserState]); // Empty dependency array ensures it runs only once on mount
 
+  
   if (loading) {
     return <LoadingSpinner />; // You can show a loading modal here
   }

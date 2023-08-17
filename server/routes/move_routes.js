@@ -3,87 +3,159 @@ const router = require('express').Router();
 const { isAuthenticated, validateToken } = require('../auth');
 const { Team, User, Favorite, Pokemon, Move } = require('../models'); // Model imports
 
+function checkUniqueMove(moves, moveName, moveType) {
+    if (!moveName || !moveType) {
+        return true; // Allow null move
+    }
+
+    const duplicateMoves = moves.filter(move =>
+        move !== undefined &&
+        move !== null &&
+        move.name === moveName &&
+        move.type === moveType
+    );
+
+    return duplicateMoves.length === 0;
+}
+
+
+// Endpoint to get moves for a specific Pokémon by its ID
+router.post('/getPokemonMoves', async (req, res) => {
+    try {
+        const { pokemonID } = req.body;
+        const pokemon = await Pokemon.findOne({ _id: pokemonID });
+
+        const moves = await Promise.all([
+            pokemon.move1 ? Move.findById(pokemon.move1) : null,
+            pokemon.move2 ? Move.findById(pokemon.move2) : null,
+            pokemon.move3 ? Move.findById(pokemon.move3) : null,
+            pokemon.move4 ? Move.findById(pokemon.move4) : null,
+        ]);
+
+        const moveInfo = moves.map(move => {
+            return move ? { name: move.name, type: move.type } : null;
+        });
+
+        console.log(moveInfo);
+        res.json({ moves: moveInfo });
+    } catch (error) {
+        console.error('Error fetching moves:', error);
+        res.status(500).json({ message: 'Error fetching moves' });
+    }
+});
+
 // Create a move
-router.post('/team/:teamID/pokemon/:pokemonID/move', isAuthenticated, async (req, res) => {
-    console.log("Got into the create route for a move.");
+router.post('/addMove', isAuthenticated, async (req, res) => {
+    console.log("Got into the addmove route for a move");
     try {
-        const teamId = req.params.teamID;
-        const pokemonId = req.params.pokemonID;
-        const newMoveData = req.body; // Assuming the new move data is sent in the request body
+        const { move, type, pokemonID } = req.body;
 
-        // Find the team
-        const team = await Team.findById(teamId);
+        const newMove = new Move({ name: move, type });
 
-        if (!team) {
-            return res.status(404).send('Team not found');
+        console.log("Pokemon ID in the add move route: ", pokemonID);
+        const pokemon = await Pokemon.findById(pokemonID);
+        console.log("Pokemon to be saved to: ", pokemon);
+        console.log("New move to be added: ", newMove);
+
+        // Fetch the actual move objects based on move IDs
+        const moves = await Promise.all([
+            pokemon.move1 ? Move.findById(pokemon.move1) : null,
+            pokemon.move2 ? Move.findById(pokemon.move2) : null,
+            pokemon.move3 ? Move.findById(pokemon.move3) : null,
+            pokemon.move4 ? Move.findById(pokemon.move4) : null,
+        ]);
+
+        const isUniqueMove = checkUniqueMove(moves, move, type);
+
+        if (isUniqueMove) {
+            const emptySlot = moves.findIndex(slot => slot === null);
+
+            if (emptySlot !== -1) {
+                console.log(`move ${emptySlot + 1}`);
+                moves[emptySlot] = newMove;
+                await newMove.save();
+
+                // Update the corresponding move slot in the Pokemon model
+                switch (emptySlot) {
+                    case 0:
+                        pokemon.move1 = newMove._id;
+                        break;
+                    case 1:
+                        pokemon.move2 = newMove._id;
+                        break;
+                    case 2:
+                        pokemon.move3 = newMove._id;
+                        break;
+                    case 3:
+                        pokemon.move4 = newMove._id;
+                        break;
+                }
+
+                await pokemon.save();
+
+                res.status(200).json({ message: 'Move added successfully', moveID: newMove._id });            } else {
+                console.log("Cannot add move, all slots are filled.");
+                res.status(400).json({ message: 'Cannot add move, all slots are filled' });
+            }
+        } else {
+            console.log("Duplicate move found.");
+            res.status(400).json({ message: 'Duplicate move found' });
         }
 
-        // Find the Pokémon within the team
-        const pokemon = team.pokemon.find(p => p._id.toString() === pokemonId);
-
-        if (!pokemon) {
-            return res.status(404).send('Pokemon not found');
-        }
-
-        // Add the new move to the Pokémon's moves array
-        pokemon.moves.push(newMoveData);
-
-        // Save the updated team (and automatically the related Pokémon)
-        await team.save();
-
-        res.send({
-            team,
-        });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server Error');
+        console.error('Error adding move:', error);
+        res.status(500).json({ message: 'Error adding move' });
     }
 });
 
 
-// delete a move
-router.delete('/team/:teamID/pokemon/:pokemonID/move/:moveID', isAuthenticated, async (req, res) => {
-    console.log("Got into the delete route for a move.");
+// Backend route to delete a move from a Pokémon by name
+router.post('/deleteMove', async (req, res) => {
     try {
-        const teamId = req.params.teamID;
-        const pokemonId = req.params.pokemonID;
-        const moveId = req.params.moveID;
-
-        // Find the team
-        const team = await Team.findById(teamId);
-
-        if (!team) {
-            return res.status(404).send('Team not found');
+      const { pokemonID, moveName } = req.body;
+  
+      // Find the Pokémon by ID
+      const pokemon = await Pokemon.findById(pokemonID);
+  
+      // Check if the Pokémon is found
+      if (pokemon) {
+        let deletedMove = null;
+  
+        // Check if the move exists in the move slots
+        if (pokemon.move1 && pokemon.move1.name === moveName) {
+          deletedMove = pokemon.move1;
+          pokemon.move1 = null;
+        } else if (pokemon.move2 && pokemon.move2.name === moveName) {
+          deletedMove = pokemon.move2;
+          pokemon.move2 = null;
+        } else if (pokemon.move3 && pokemon.move3.name === moveName) {
+          deletedMove = pokemon.move3;
+          pokemon.move3 = null;
+        } else if (pokemon.move4 && pokemon.move4.name === moveName) {
+          deletedMove = pokemon.move4;
+          pokemon.move4 = null;
+        } else {
+          return res.status(404).json({ message: 'Move not found on this Pokemon' });
         }
-
-        // Find the Pokémon within the team
-        const pokemon = team.pokemon.find(p => p._id.toString() === pokemonId);
-
-        if (!pokemon) {
-            return res.status(404).send('Pokemon not found');
+  
+        await pokemon.save();
+  
+        // Delete the move from the Move collection
+        if (deletedMove) {
+          await Move.findByIdAndDelete(deletedMove._id);
+          res.status(200).json({ message: 'Move deleted successfully' });
+        } else {
+          res.status(404).json({ message: 'Move not found' });
         }
-
-        // Find the index of the move to delete
-        const moveIndex = pokemon.moves.findIndex(move => move._id.toString() === moveId);
-
-        if (moveIndex === -1) {
-            return res.status(404).send('Move not found');
-        }
-
-        // Remove the move from the Pokémon's moves array
-        pokemon.moves.splice(moveIndex, 1);
-
-        // Save the updated team (and automatically the related Pokémon)
-        await team.save();
-
-        res.send({
-            team,
-        });
+      } else {
+        res.status(404).json({ message: 'Pokemon not found' });
+      }
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Server Error');
+      console.error('Error deleting move:', error);
+      res.status(500).json({ message: 'Error deleting move' });
     }
-});
+  });
+
 
 
 module.exports = router;
