@@ -41,7 +41,7 @@ function Header(props) {
                   <NavLink to={props.state.user ? "/" : "/"}>Pokedex Express</NavLink>
                 </h1>
               </div>
-              <div className="hidden md:flex items-center space-x-4">
+              <div className="hidden lg:flex items-center space-x-4">
                 <motion.div
                   className="box"
                   whileHover={{ scale: 1.1 }}
