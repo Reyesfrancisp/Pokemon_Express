@@ -37,7 +37,7 @@ function Header(props) {
                   src="/finalLogo.png"
                   alt="Final Logo"
                 />
-                <h1 className="text-2xl font-bold">
+                <h1 className="text-2xl font-bold ex">
                   <NavLink to={props.state.user ? "/" : "/"}>Pokedex Express</NavLink>
                 </h1>
               </div>
@@ -52,6 +52,18 @@ function Header(props) {
                     className="text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Home
+                  </NavLink>
+                </motion.div>
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                >
+                  <NavLink
+                    to="/donation"
+                    className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Donate
                   </NavLink>
                 </motion.div>
 
@@ -183,6 +195,12 @@ function Header(props) {
                     className="text-white block px-3 py-2 rounded-md text-base font-medium"
                   >
                     Teams
+                  </NavLink>
+                  <NavLink
+                    to="/donation"
+                    className="text-white block px-3 py-2 rounded-md text-base font-medium"
+                  >
+                    Donate
                   </NavLink>
                   <NavLink to="/search" className="text-white block px-3 py-2 rounded-md text-base font-medium">
                     PokeDex
