@@ -31,7 +31,7 @@ async function deletePokemonAndRemoveFromTeam(team, pokemonID) {
         } else if (team.pokemon6 && team.pokemon6.toString() === stringPokemonID) {
             team.pokemon6 = null;
         }
-        await team.save();
+        team.save();
     }
 
     // Delete associated Pokémon documents

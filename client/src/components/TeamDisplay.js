@@ -76,23 +76,23 @@ function TeamDisplay(props) {
 
     const handleDeletePokemon = async (pokemonID) => {
         try {
-          // Create an object with team ID and pokemon ID
-          const deleteData = {
-            teamID: teamData._id,
-            pokemonID: pokemonID
-          };
-      
-          // Perform the delete operation using the object in the request body
-          const response = await axios.delete('/delete-pokemon', { data: deleteData });
-          console.log('Pokemon deleted:', response.data);
-      
-          // Update the displayed list of pokemonData by filtering out the deleted Pokemon
-          setPokemonData(prevData => prevData.filter(pokemon => pokemon._id !== pokemonID));
+            // Create an object with team ID and pokemon ID
+            const deleteData = {
+                teamID: teamData._id,
+                pokemonID: pokemonID
+            };
+
+            // Perform the delete operation using the object in the request body
+            const response = await axios.delete('/delete-pokemon', { data: deleteData });
+            console.log('Pokemon deleted:', response.data);
+
+            // Update the displayed list of pokemonData by filtering out the deleted Pokemon
+            setPokemonData(prevData => prevData.filter(pokemon => pokemon._id !== pokemonID));
         } catch (error) {
-          console.error('Error deleting Pokemon:', error);
+            console.error('Error deleting Pokemon:', error);
         }
-      };
-      
+    };
+
 
 
     return (
@@ -100,44 +100,46 @@ function TeamDisplay(props) {
             <div className="flex justify-between items-center">
                 <input
                     type="text"
-                    className="text-xl font-semibold mb-2 focus:outline-none border-b-2 border-blue-500"
+                    className="text-xl font-semibold mb-2 focus:outline-none border-b-2 border-blue-500 w-2/3 pr-2"
                     placeholder={teamData.name}
                     value={editedTeamName}
                     onChange={handleTeamNameChange}
                 />
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300"
                     onClick={handleSaveTeamName}
                 >
                     Save
                 </button>
             </div>
+     
 
-            {/* Display up to 6 Pokémon */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {pokemonData.map((pokemon, index) => (
-                    <div key={index} className="border p-2 rounded shadow">
-                        <h3 className="capitalize text-lg font-medium">{pokemon.name}</h3>
-                        {/* Display other details if needed */}
-                        <div className="flex mt-2">
-                            <button
-                                className="bg-blue-500 text-white text-sm px-4 py-2 rounded mr-2"
-                                onClick={() => handleEditPokemon(pokemon._id)}
-                            >
-                                Edit
-                            </button>
-                            <button
-                                className="bg-red-500 text-white text-sm px-4 py-2 rounded"
-                                onClick={() => handleDeletePokemon(pokemon._id)}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                ))}
+
+            {/* Display up to 6 Pokémon */ }
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {pokemonData.map((pokemon, index) => (
+            <div key={index} className="border p-2 rounded shadow">
+                <h3 className="capitalize text-lg font-medium">{pokemon.name}</h3>
+                {/* Display other details if needed */}
+                <div className="flex mt-2">
+                    <button
+                        className="bg-blue-500 text-white text-sm px-4 py-2 rounded mr-2"
+                        onClick={() => handleEditPokemon(pokemon._id)}
+                    >
+                        Edit
+                    </button>
+                    <button
+                        className="bg-red-500 text-white text-sm px-4 py-2 rounded"
+                        onClick={() => handleDeletePokemon(pokemon._id)}
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
+        ))}
+    </div>
 
-        </div>
+        </div >
     );
 }
 
