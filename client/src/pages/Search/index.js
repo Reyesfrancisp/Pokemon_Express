@@ -1,19 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import getPokemonInfo from "./pokeApiQuery";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import PokemonCard from "../../components/PokemonOutput";
+import LoadingSpinner from "../../components/Loading";
 
 function Search() {
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [info, setInfo] = useState({
-    formattedID: "025",
-    pokemonName: "Pikachu",
-    pokemonID: "25",
-    pokemonHeight: "1'00\"",
-    pokemonWeight: 60,
-    type1: "Electric",
-    type2: "",
-  });
+  const [info, setInfo] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getRandomNumber = () => Math.floor(Math.random() * 1008) + 1;
+        const randomNum = getRandomNumber();
+        const pokemonData = await getPokemonInfo(randomNum);
+        await setInfo(pokemonData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching Pokemon info:', error);
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, []); // Only include randomNum and getPokemonInfo
+  
+
 
   const handleSearch = async () => {
     try {
@@ -47,9 +61,20 @@ function Search() {
       console.error("An error occurred:", error);
     }
   };
+  if (loading) {
+    return <LoadingSpinner />; // You can show a loading modal here
+  }
+
+
+  //Use the key enter to search the pokemon
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
-    <div className="flex-col md:flex h-screen mb-40">
+    <div className="flex-col md:flex h-screen mb-40 mt-10">
       <h1 className="text-3xl text-center font-extrabold text-white mb-4">Search Page</h1>
       <div className="flex flex-col items-center">
         <input
@@ -58,6 +83,7 @@ function Search() {
           placeholder="Search Pokemon"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <button
           className="px-4 py-2 mt-4 bg-blue-500 text-white hover:bg-blue-600"
@@ -67,25 +93,21 @@ function Search() {
         </button>
 
         <div className="flex justify-center items-center space-x-10 mt-4">
-
           <button
-            className="py-2 px-4 text-white "
+            className="py-2 px-4 text-white bg-black"
             onClick={previousPokemon}
           >
-            <FaArrowLeft /> 
+            <FaArrowLeft />
           </button>
-
 
           <PokemonCard info={info} />
 
-
           <button
-            className="py-4 px-4 text-white "
+            className="py-2 px-4 text-white bg-black "
             onClick={nextPokemon}
           >
-            <FaArrowRight /> 
+            <FaArrowRight />
           </button>
-
         </div>
       </div>
     </div>
