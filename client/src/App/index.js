@@ -50,7 +50,7 @@ function App() {
 
   return (
 
-    <div className="flex flex-col min-h-screen min-w-screen">
+    <div className="flex flex-col min-h-screen min-w-screen bg-gradient-to-b from-red-600 to-red-400">
       <Header state={state} setState={setState} />
 
       <section className="flex-grow">
