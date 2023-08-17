@@ -50,42 +50,43 @@ function App() {
 
   return (
 
-    <div className = "min-h-screen min-w-screen">
+    <div className="flex flex-col min-h-screen min-w-screen bg-gradient-to-b from-red-600 to-red-400">
       <Header state={state} setState={setState} />
 
+      <section className="flex-grow">
+        <Routes>
 
-      <Routes>
+          <Route path="/" element={<Landing />} />
 
-      <Route path="/" element={<Landing />} />
+          {/* go to /auth if not logged in, otherwise /team */}
+          {state.user ? (
+            <Route path="/teams" element={<TeamList userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
+          ) : (
+            <Route path="/teams" element={<Navigate to="/auth" />} />
+          )}
 
-        {/* go to /auth if not logged in, otherwise /team */}
-        {state.user ? (
-          <Route path="/teams" element={<TeamList userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
-        ) : (
-          <Route path="/teams" element={<Navigate to="/auth" />} />
-        )}
+          <Route path="/search" element={<Search state={state} setState={setState} />} />
 
-        <Route path="/search" element={<Search state={state} setState={setState} />} />
-
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-
-
-        <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
-
-        <Route path="/pokemon-edit" element={<PokemonEdit userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
 
 
-        <Route path="/auth" element={(
-          <Redirect user={state.user}>
-            <AuthForm setState={setState} />
-          </Redirect>
-        )} />
+          <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
+
+          <Route path="/pokemon-edit" element={<PokemonEdit userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
 
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="/auth" element={(
+            <Redirect user={state.user}>
+              <AuthForm setState={setState} />
+            </Redirect>
+          )} />
 
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+
+      </section>
       <Footer />
     </div>
   );
