@@ -14,15 +14,24 @@ function TeamEdit(props) {
     const { teamID } = stateTracker;
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
-    const [info, setInfo] = useState({
-        formattedID: "151",
-        pokemonName: "mew",
-        pokemonID: "151",
-        pokemonHeight: "1'4\"",
-        pokemonWeight: "8.81",
-        type1: "Psychic",
-        type2: "",
-    });
+    const [info, setInfo] = useState();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const getRandomNumber = () => Math.floor(Math.random() * 1008) + 1;
+                const randomNum = getRandomNumber();
+                const pokemonData = await getPokemonInfo(randomNum);
+                await setInfo(pokemonData);
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching Pokemon info:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []); // Only include randomNum and getPokemonInfo
 
     const navigate = useNavigate();
 
@@ -104,17 +113,16 @@ function TeamEdit(props) {
         return <Navigate to="/teams" replace />;
     }
 
-    if (loading) {
+    if (loading || !info) {
         return <LoadingSpinner />; // You can show a loading modal here
     }
 
     return (
         <div className="flex-col md:flex my-4">
 
-            {/* back button that's on the left of the page but a decent margin away that will redirect to /teams */}
-
+           
             <button
-                className="bg-gray-400 hover:bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded-md shadow-md w-28"
+                className="bg-white hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-md shadow-md w-28"
                 style={{ marginLeft: 'calc(25% - 8px)', marginTop: '20px' }}
                 onClick={handleBackButtonClick}
             >
@@ -122,12 +130,12 @@ function TeamEdit(props) {
             </button>
 
 
-            <h1 className="text-3xl text-center font-semibold my-6">Team Page</h1>
+            <h3 className="text-white text-3xl text-center font-extrabold font-weight p-2 my-6">Edit Your Team</h3>
             <div className="flex flex-col items-center">
                 <TeamDisplay teamData={teamData} setTeamData={setTeamData} stateTracker={stateTracker} setStateTracker={setStateTracker} />
 
                 <button
-                    className="bg-blue-500 text-white px-4 py-2 my-8 rounded-md"
+                    className="bg-blue-500 text-white px-4 py-2 my-2 rounded-md"
                     onClick={() => addPokemonToTeam(teamID, info.pokemonName)}
                 >
                     Add Pokemon to Team
@@ -140,9 +148,9 @@ function TeamEdit(props) {
                     >
                         <FaArrowLeft />
                     </button>
-
-                    <PokemonCard info={info} />
-
+                    <div className="text-center">
+                        <PokemonCard info={info} />
+                    </div>
                     <button
                         className="py-2 px-4 text-white bg-black "
                         onClick={nextPokemon}

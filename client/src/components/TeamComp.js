@@ -58,28 +58,29 @@ function TeamComp(props) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto border p-4 rounded shadow mb-4">
-    <h2 className="text-xl font-semibold mb-4 text-center">{teamData.name}</h2>
+    <div className="max-w-4xl mx-auto bg-blue-500 text-white border p-4 rounded shadow mb-4">
+
+    <h3 className="text-xl font-semibold mb-4 text-center">{teamData.name}</h3>
     
     {/* Display up to 6 Pokémon */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {pokemonData.map((pokemon, index) => (
-        <div key={index} className="border p-2 rounded shadow">
-          <h3 className="text-lg text-center font-medium">{pokemon.name}</h3>
+        <div key={index} className="border p-2 rounded shadow bg-black">
+          <h3 className="text-lg text-center capitalize font-medium">{pokemon.name}</h3>
           {/* Display other details if needed */}
         </div>
       ))}
     </div>
   
-    <div className="flex justify-end mt-4 space-x-4">
+    <div className="flex justify-between mt-4 space-x-20">
       <button
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className=" bg-yellow-500 text-white px-4 py-2 my-4 rounded"
         onClick={handleEditClick}
       >
         Edit
       </button>
       <button
-        className="bg-red-500 text-white px-4 py-2 rounded"
+        className=" bg-red-500 text-white px-4 py-2 my-4 rounded"
         onClick={handleDeleteClick}
       >
         Delete
