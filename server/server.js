@@ -18,7 +18,7 @@ const is_prod = process.env.PORT;
 
 
 if (is_prod) {
-  app.use(express.static(path.join(__dirname, '../browser/build')));
+  app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
 // Load middleware
@@ -33,6 +33,20 @@ app.use('/', pokemonRoutes);
 app.use('/', teamRoutes);
 app.use('/', userRoutes);
 
+
+
+if (is_prod){
+
+  app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "../client/build/index.html"))
+
+  )};
+
+
+  app.use( (error,req, res, next) => {
+    console.error (error.message);
+    res.send(error);
+  })
 // Load the connection
 db.once('open', () => {
   app.listen(PORT, () => console.log('Server started on port %s', PORT));
