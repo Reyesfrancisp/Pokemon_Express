@@ -9,7 +9,10 @@
     "dev": "concurrently \"npm run client:dev\" \"npm run server:dev\"",
     "install:client": "cd ./client && npm i",
     "install:server": "cd ./server && npm i",
-    "install": "concurrently \"npm run install:client\" \"npm run install:server\""
+    "install": "concurrently \"npm run install:client\" \"npm run install:server\"",
+    "scrape": "node ./scraper/index.js",
+    "build": "cd ./client && npm run build",
+    "start": "cd ./server && node server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +21,5 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "jsonwebtoken": "^9.0.1",
-    "mongoose": "^7.4.3",
-    "node-fetch": "^3.3.2"
   }
 }
