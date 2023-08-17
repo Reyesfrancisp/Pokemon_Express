@@ -42,7 +42,7 @@ function TeamList(props) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center mt-10 mb-60">
       <h2 className="text-2xl lg:text-4xl font-semibold text-center my-4 text-blue-900">
         Welcome to Your Pokemon Teams, {username}!
       </h2>
@@ -52,7 +52,7 @@ function TeamList(props) {
       >
         Create New Team
       </button>
-      <p className="text-l lg:text-xl text-gray-700 text-center mb-8">
+      <p className="text-l lg:text-xl text-gray-700 text-center mb-20">
         Here's a list of your teams:
       </p>
 
