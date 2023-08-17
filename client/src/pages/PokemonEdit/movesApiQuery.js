@@ -45,4 +45,4 @@ const getPokemonMoves = async (input) => {
 };
 
 
-module.exports = getPokemonMoves;
+export default getPokemonMoves;
