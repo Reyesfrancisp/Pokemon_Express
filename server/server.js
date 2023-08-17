@@ -11,6 +11,7 @@ const favoriteRoutes = require('./routes/favorite_routes');
 const pokemonRoutes = require('./routes/pokemon_routes');
 const teamRoutes = require('./routes/team_routes');
 const userRoutes = require('./routes/user_routes');
+const paymentRoutes = require('./routes/payment_routes');
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -32,6 +33,7 @@ app.use('/', favoriteRoutes);
 app.use('/', pokemonRoutes);
 app.use('/', teamRoutes);
 app.use('/', userRoutes);
+app.use('/', paymentRoutes);
 
 
 

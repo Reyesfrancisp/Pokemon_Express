@@ -45,7 +45,9 @@ h1, h2 {
   font-family: 'Alfa Slab One', cursive;
 }
 
-/* Add styles for .notFound, header, and footer (not provided in your code) */
+h1.ex {
+  font-family: 'sans-serif', cursive;
+}
 
 /* About Page */
 .about-container {
@@ -83,12 +85,12 @@ h1, h2 {
   text-decoration: underline;
 }
 
-/* Custom heading style */
+
 .custom-heading {
   font-family: 'Alfa Slab One', sans-serif;
   font-size: 2.5rem;
   color: #333;
-  /* Add other styles as needed */
+ 
 }
 
 /* Contact Page */
@@ -133,13 +135,24 @@ h1, h2 {
 .contact-message {
   margin-top: 20px;
   font-size: 18px;
-  color: #444;
+  color: #fff;
   max-width: 600px;
   line-height: 1.5;
 }
 
-/* index.scss or any relevant SCSS file */
+//contact image animation
+.animated-image {
+  animation: moveLeftToRight 5s infinite;
+}
 
-.bold-text {
-  font-weight: bold;
+@keyframes moveLeftToRight {
+  0% {
+      transform: translateX(-100%);
+  }
+  50% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
 }

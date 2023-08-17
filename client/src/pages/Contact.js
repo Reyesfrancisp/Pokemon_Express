@@ -1,15 +1,16 @@
 import React from 'react';
-import '../index.scss'; // Import the main SCSS file if needed
-import contactImage from '../images/Pokemon-PNG.png'; // Import the new image file
-
-
+import contactImage from '../images/Pokemon-PNG.png'; 
 
 function Contact() {
     return (
         <div className="contact-container">
-            <h1>Contact Us</h1>
-            <img src={contactImage} alt="Contact Us" className="contact-image" />
-            <p className="bold-text">
+            <h1 className='text-white text-3xl'>Contact Us</h1>
+            <img
+                src={contactImage}
+                alt="Contact Us"
+                className="contact-image animated-image"
+            />
+            <p className="font-bold text-white">
                 If you would like to get in touch with our team, feel free to reach out to us through the following channels:
             </p>
             <ul className="contact-list">
@@ -18,12 +19,10 @@ function Contact() {
                         GitHub Profile
                     </a>
                 </li>
-                {/* Add more contact information as needed */}
             </ul>
             <p className="contact-message">We look forward to hearing from you!</p>
         </div>
     );
 }
-
 
 export default Contact;

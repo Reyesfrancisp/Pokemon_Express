@@ -16,6 +16,7 @@ import Search from '../pages/Search';
 import TeamList from '../pages/Team';
 import TeamEdit from '../pages/TeamEdit';
 import PokemonEdit from '../pages/PokemonEdit';
+import Donation from '../pages/Donation';
 
 function App() {
   const [state, setState] = useState({
@@ -69,6 +70,8 @@ function App() {
 
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+
+          <Route path="/donation" element={<Donation />} />
 
 
           <Route path="/team-edit" element={<TeamEdit userState={userState} setUserState={setUserState} stateTracker={stateTracker} setStateTracker={setStateTracker} />} />
