@@ -65,11 +65,11 @@ function Landing() {
   }
 
   return (
-    <main className="landing bg-cover bg-center h-screen flex items-center">
+    <main className="landing bg-cover bg-center h-screen flex items-center mt-40 mb-40">
       <div className="mx-auto text-center">
         <DancingPokemon />
 
-        {/* Add TypingEffect component */}
+      
         <TypingEffect text={welcomeText} />
 
         <p className="text-lg md:text-xl text-black mb-8">
