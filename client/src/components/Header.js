@@ -91,7 +91,7 @@ function Header(props) {
                     <NavLink
                       onClick={logout}
                       to="/"
-                      className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="text-white px-3 py-2 rounded-md text-md font-medium"
                     >
                       Log Out
                     </NavLink>
@@ -111,7 +111,7 @@ function Header(props) {
                   </motion.div>
                 )}
               </div>
-              <div className="-mr-2 flex md:hidden">
+              <div className="-mr-2 flex lg:hidden">
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   type="button"
@@ -169,7 +169,7 @@ function Header(props) {
             leaveTo="opacity-0 scale-95"
           >
             {(ref) => (
-              <div className="md:hidden" id="mobile-menu">
+              <div className="lg:hidden" id="mobile-menu">
                 <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                   <NavLink
                     to="/"

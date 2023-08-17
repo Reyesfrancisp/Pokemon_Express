@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function Footer() {
   return (
+    
     <footer className="bg-white rounded-lg shadow dark:bg-gray-900 m-2 p-2 md:p-4">
       <div className="w-full max-w-screen-xl mx-auto flex flex-col md:flex-row items-center justify-between">
         <a
@@ -61,6 +62,6 @@ function Footer() {
       </div>
     </footer>
   );
-}
+  }
 
 export default Footer;
