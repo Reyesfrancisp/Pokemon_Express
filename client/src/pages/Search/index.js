@@ -1,19 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import getPokemonInfo from "./pokeApiQuery";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import PokemonCard from "../../components/PokemonOutput";
+import LoadingSpinner from "../../components/Loading";
 
 function Search() {
+
   const [searchQuery, setSearchQuery] = useState("");
-  const [info, setInfo] = useState({
-    formattedID: "025",
-    pokemonName: "Pikachu",
-    pokemonID: "25",
-    pokemonHeight: "1'00\"",
-    pokemonWeight: 60,
-    type1: "Electric",
-    type2: "",
-  });
+  const [info, setInfo] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getRandomNumber = () => Math.floor(Math.random() * 1008) + 1;
+        const randomNum = getRandomNumber();
+        const pokemonData = await getPokemonInfo(randomNum);
+        await setInfo(pokemonData);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching Pokemon info:', error);
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, []); // Only include randomNum and getPokemonInfo
+  
+
 
   const handleSearch = async () => {
     try {
@@ -47,6 +61,10 @@ function Search() {
       console.error("An error occurred:", error);
     }
   };
+  if (loading) {
+    return <LoadingSpinner />; // You can show a loading modal here
+  }
+
 
   return (
     <div className="flex-col md:flex h-screen mb-40">
@@ -72,7 +90,7 @@ function Search() {
             className="py-2 px-4 text-white bg-black"
             onClick={previousPokemon}
           >
-            <FaArrowLeft /> 
+            <FaArrowLeft />
           </button>
 
 
@@ -83,7 +101,7 @@ function Search() {
             className="py-2 px-4 text-white bg-black "
             onClick={nextPokemon}
           >
-            <FaArrowRight /> 
+            <FaArrowRight />
           </button>
 
         </div>
