@@ -14,7 +14,7 @@ function Footer() {
           {/* Image placeholder */}
           <img
             src="/finalLogo.png"
-            className="rounded-full h-8 w-8 mr-4"
+            className="rounded-full h-16 w-16 mr-4"
             alt="Logo"
           />
           {/* Name of the app */}
@@ -47,15 +47,15 @@ function Footer() {
       </div>
       <hr className="my-3 border-gray-200 md:my-4 dark:border-gray-700" />
       <div className="w-full max-w-screen-xl mx-auto text-center">
-        <span className="block text-xxs md:text-xs text-white md:text-center dark:text-gray-400">
+        <span className="block text-xxs md:text-xs text-white md:text-center">
           © {new Date().getFullYear()}{' '}
           <a
-            href="https://github.com/Reyesfrancisp/pokemon_devdex"
+            href="https://github.com/Reyesfrancisp/Pokemon_Express"
             className="hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            App Name™
+            Pokemon Express™
           </a>
           . All Rights Reserved.
         </span>

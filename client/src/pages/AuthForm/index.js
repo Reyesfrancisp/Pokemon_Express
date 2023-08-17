@@ -77,9 +77,9 @@ function AuthForm(props) {
 
   return (
     <div className="flex flex-col h-screen items-center mb-20 justify-center">
-      <h1 className="text-3xl mb-4 font-extrabold text-white">
+      <h3 className="text-4xl mb-4 font-extrabold text-white">
         {formData.isLogin ? 'Log In' : 'Register'}
-      </h1>
+      </h3>
 
       <form className="w-72 bg-white p-6 rounded-lg shadow-md">
         {formData.isLogin ? (

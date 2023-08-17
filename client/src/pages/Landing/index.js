@@ -27,7 +27,7 @@ function TypingEffect({ text }) {
     };
   }, [currentIndex, text]);
 
-  return <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">{displayText}</h1>;
+  return <h3 className="text-4xl md:text-6xl text-white font-bold mb-4">{displayText}</h3>;
 }
 
 function Landing() {

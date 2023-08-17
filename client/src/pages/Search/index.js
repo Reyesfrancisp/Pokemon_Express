@@ -75,7 +75,7 @@ function Search() {
 
   return (
     <div className="flex-col md:flex h-screen mb-40 mt-10">
-      <h1 className="text-3xl text-center font-extrabold text-white mb-4">Search Page</h1>
+      <h3 className="text-4xl text-center font-extrabold text-white mb-4">PokeDex</h3>
       <div className="flex flex-col items-center">
         <input
           className="px-4 py-2  border border-gray-300"

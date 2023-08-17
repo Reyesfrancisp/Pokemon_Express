@@ -33,7 +33,7 @@ function Header(props) {
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-4">
                 <img
-                  className="rounded-full h-8 w-8 mr-4"
+                  className="rounded-full h-16 w-16 mr-4"
                   src="/finalLogo.png"
                   alt="Final Logo"
                 />
