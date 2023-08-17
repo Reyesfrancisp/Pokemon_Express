@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Transition } from "@headlessui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { motion } from 'framer-motion';
 
 function Header(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,26 +42,52 @@ function Header(props) {
                 </h1>
               </div>
               <div className="hidden md:flex items-center space-x-4">
-                <NavLink
-                  to="/"
-                  className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                 >
-                  Home
-                </NavLink>
-                <NavLink
-                  to="/search"
-                  className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <NavLink
+                    to="/"
+                    className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Home
+                  </NavLink>
+                </motion.div>
+
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                 >
-                  PokeDex
-                </NavLink>
-                <NavLink
-                  to="/teams"
-                  className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <NavLink
+                    to="/search"
+                    className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    PokeDex
+                  </NavLink>
+                </motion.div>
+
+                <motion.div
+                  className="box"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                 >
-                  Teams
-                </NavLink>
+                  <NavLink
+                    to="/teams"
+                    className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    Teams
+                  </NavLink>
+                </motion.div>
+
+                {/* Conditionally render logout or login NavLink */}
                 {props.state.user ? (
-                  <>
+                  <motion.div
+                    className="box"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  >
                     <NavLink
                       onClick={logout}
                       to="/"
@@ -68,14 +95,20 @@ function Header(props) {
                     >
                       Log Out
                     </NavLink>
-                  </>
+                  </motion.div>
                 ) : (
-                  <NavLink
-                    to="/auth"
-                    className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <motion.div
+                    className="box"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
                   >
-                    Login
-                  </NavLink>
+                    <NavLink
+                      to="/auth"
+                      className="text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Login
+                    </NavLink>
+                  </motion.div>
                 )}
               </div>
               <div className="-mr-2 flex md:hidden">
